@@ -1,3 +1,5 @@
+// Auhtor: Mansoor Ghazi
+
 import React from 'react';
 
 const Loading = (props) => {
