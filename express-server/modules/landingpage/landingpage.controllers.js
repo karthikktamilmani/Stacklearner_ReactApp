@@ -1,3 +1,7 @@
+// Author: Devarshi Pandya
+// Email: devarshi.pandya@dal.ca
+// Banner ID: B00840003
+
 /* Import code dependencies. In this case, these are 
 learning path module's data models. */
 const { Project } = require('../../models/learningpath.models');
