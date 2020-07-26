@@ -1,3 +1,7 @@
+// Author: Daksh Patel
+
+// All the services related to user management
+
 const passwordHash = require('password-hash');
 
 
