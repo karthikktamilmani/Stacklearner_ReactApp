@@ -10,34 +10,43 @@
 
 ## Authors & Their Features
 
-* [Devarshi Pandya](devarshi.pandya@dal.ca) - (Maintainer)\
-Location of implemented feature APIs - 
-```
-Landing Page
-The contents of the landing page are fetched from MongoDB and displayed in the react application.
-```
 * [Daksh Patel](dk792765@dal.ca) - (Maintainer)\
-Location of implemented feature APIs - 
+Location of implemented feature APIs -
 ```
-Implemented the SuggestionsList component.
-```
-* [Karthik Tamil Mani](kr630601@dal.ca) - (Maintainer)\
-Location of implemented feature APIs - 
-```
-Implemented the Info component.
-```
-* [Ravi Patel](rv526909@dal.ca) - (Maintainer)\
-Location of implemented feature APIs - 
-```
-Student Progress Tracking
-This feature will enable students to track their progress across multiple learning paths, projects, and tutorials. Students will be able to resume learning from where they last left, as well as reset their progress to start afresh.
-```
-* [Mansoor Ghazi](mansoor.ghazi@dal.ca) - (Maintainer)\
-Location of implemented feature APIs - 
-```
-Implemented the Autosuggestion component and routing.
-```
+Implemented the complete user management feature. User management feature includes the following:
 
+• Signup
+• Signin
+• Signout
+• User Authentication
+• Update profile
+• Forgot Password
+
+The files I have worked on are as follow:
+.
+├── express-server
+│   ├──globals.js                   # added createResponse method for global usage
+│   ├── modules
+│   │   ├── authentication          # Made all the files in "./express-server/modules/authentication/*"
+│   │   ├── mailer                  # Made all the files in "./express-server/modules/mailer/*"
+│   │   ├── usermanagement          # Made all the files in "./express-server/modules/usermanagement/*"
+
+│   ├── models
+│   │   ├── authtoken.model.js      # Made the models file for authentication token management.
+│   │   ├── forgotpassword.model.js # Made the models file for forgot password management.
+│   │   ├── role.model.js           # Made the models file for role management.
+│   │   ├── user.model.js           # Made the models file for user information management.
+├── react-client
+│   ├── src
+│   │   ├── authentication          # Made all the files in "./react-client/src/authentication/*"
+│   │   ├── components
+│   │   │   ├── StudentProfile      # Made the following files in "./react-client/src/components/StudentProfile/"
+│   │   │   │   ├── SignUp.js
+│   │   │   │   ├── SignIn.js
+│   │   │   │   ├── StudentProfile.js
+│   │   │   │   ├── UpdateProfile.js
+└── README.md
+```
 
 ### Prerequisites
 
@@ -56,23 +65,30 @@ Implemented the Autosuggestion component and routing.
 ### Installing
 
 Install Node.js on the local machine.
-Open Visual Studio Code and type the following command
+Open terminal and type the following command
 
 ```
-npx create-react-app AppName
+git clone https://git.cs.dal.ca/dpandya/group17-stacklearner-a4.git
 ```
 
-The react application is ready to use. Type the following commands to run it on your localhost.
+```
+cd group17-stacklearner-a4/react-client
+```
 
 ```
-cd MyApp
+npm install
 npm start
 ```
 
-To run backend server, execute the following command to run it on your localhost.
+The react application is ready to use and using the backend hosted on heroku at https://stacklearner-a4.herokuapp.com/
+
+
+To run backend server (locally), execute the following command to run it on your localhost after navigating to the root directory of the project.
 
 ```
-node server.js
+cd express-server
+npm install
+npm start
 ```
 
 
@@ -104,3 +120,8 @@ web: node server.js
 ```
 Connect Heroku to the GitHub repository, and deploy the app.
 
+### Code Referencing
+No code was referenced from any online resource.
+
+### Integration
+A feature-based workflow was adopted that involved developing assigned features on separated branches, and then merging them on the master branch
