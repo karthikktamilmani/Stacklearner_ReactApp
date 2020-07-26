@@ -1,3 +1,8 @@
+// Author: Daksh Patel
+
+// All the services related to authentication tokens
+
+
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const createResponse = require('../../globals');
