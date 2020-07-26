@@ -170,6 +170,57 @@ The feature’s components are organised into two different set of components: `
 				├── Testimonials.js
 ```
 
+### Karthikk Tamil Mani
+
+####Subscription Management
+This feature helps the students to get access to our premium or pro features/contents. Students can subscribe to a period that they would like and also has options to avail promo codes, save cards for future purchases and get track of the payment.
+
+Tasks:
+
+* Payment
+* Redeem coupon code
+* Save cards
+* Delete cards
+* Track payment hisory
+
+**Back-End Service**
+
+```
+├── express-server
+│   ├── modules
+│   │   ├── payment
+|   │   │   ├── payment.controllers.js
+|   │   │   ├── payment.routes.js
+
+│   ├── models
+│   │   ├── payment.model.js
+|
+```
+
+**Front-End Service**
+
+```
+├── react-client
+│   ├── src
+│   │   ├── components
+│   │   │   ├── Payment
+│   │   │   │   ├── index.js
+│   │   │   │   ├── index.scss
+│   │   │   │   ├── Add Card
+│   │   │   |   │   ├── index.js
+│   │   |   │   │   ├── index.scss
+│   │   │   │   ├── History
+│   │   │   |   │   ├── index.js
+│   │   │   │   ├── Cards
+│   │   │   |   │   ├── index.js
+│   │   │   ├── Subscription
+│   │   │   │   ├── index.js
+│   │   │   │   ├── index.scss
+│   │   ├── store.js
+│   │   ├── variables.scss
+│   │   ├── App.scss
+```
+
 ## Code Referencing
 No code was referenced from any online resource.
 
