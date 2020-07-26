@@ -1,3 +1,5 @@
+// Author: Mansoor Ghazi
+
 // Import core dependencies
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
