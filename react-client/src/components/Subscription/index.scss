@@ -1,0 +1,99 @@
+/**
+ * App Subscription Styles
+ *
+ * @author :: Karthikk Tamil Mani, B00838575
+ */
+
+@import '../../variables';
+.active-card {
+    background-color: $primary-background !important;
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15)!important;
+    color: #fff !important;
+    h2 {
+        color: #fff !important;
+    }
+    .help-text {
+        color: #fff !important;
+    }
+}
+
+.subscription-wrapper {
+    min-height: calc(100vh - 590px);
+    .card {
+        border: 1px solid #e2e3ec !important;
+        background-color: #fff;
+        transition: background-color 0.3s ease-in, box-shadow 0.5s ease;
+    }
+    .help-text {
+        font-size: 13px;
+        font-weight: lighter;
+        color: $primary-color;
+    }
+    h2 {
+        font-size: 45px;
+        font-weight: bolder;
+        color: $primary-color;
+    }
+    label {
+        display: block;
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    input {
+        color: $light-gray;
+        border: 2px solid #EFEEFD;
+    }
+    .promo-section {
+        .list-group {
+            font-size: 0.85rem;
+        }
+        .text-success {
+            color: $green !important;
+        }
+        .list-group,
+        .card,
+        .list-group-item {
+            border: none !important;
+        }
+    }
+}
+
+.payment-banner {
+    padding: 0.75rem 1.25rem;
+    background: #FFF3CD !important;
+    color: #c59503;
+    .icon {
+        margin-right: 5px;
+        font-size: 0.80rem;
+    }
+}
+
+.main-content {
+    padding-top: 5rem;
+    padding-bottom: 10rem;
+}
+
+.subscription-wrapper {
+    .h1,
+    .h2,
+    .h3,
+    .h4,
+    .h5,
+    .h6,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: bold;
+        margin-bottom: .5rem;
+    }
+    p {
+        margin-bottom: 1rem;
+    }
+    .main-nav {
+        display: block !important;
+    }
+}
