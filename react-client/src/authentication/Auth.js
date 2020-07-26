@@ -1,3 +1,9 @@
+// Author: Daksh Patel
+
+// The class Auth has a singleton instance which store the state of whether the
+// user is authenticated or not. Moreover, it provides a class method to login
+// which updates the login state.
+
 import axios from "./axios-user-management";
 
 class Auth {
@@ -6,7 +12,8 @@ class Auth {
 		this.authToken = localStorage.getItem("authToken") || null;
 		this.user = null;
 	}
-
+    
+    // The method takes the payload and success callback as an arguement.
 	login(values, callback) {
 		const credentials = {
 			email: values.email,
@@ -29,6 +36,8 @@ class Auth {
 				}
 			)
 	}
+    
+    // The method logout takes the success callback as an argument
 
 	async logout(callback) {
 		let response;
@@ -43,6 +52,10 @@ class Auth {
 		return response.status === 200;
 	}
 	
+    // 	The function isAuthenticated takes in successCallback and failureCallback
+    // as arguments, and executes success callback if user is authenticated, else 
+    // executes failure callback
+    
 	isAuthenticated(successCallback, failureCallback) {
 		if (this.authenticated) {
 			successCallback();
@@ -78,4 +91,5 @@ class Auth {
 	}
 }
 
+// exporting singleton instance.
 export default new Auth();
