@@ -1,8 +1,11 @@
+// Author: Daksh Patel
+
 import React, { Component, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../Common/Footer';
 import auth from '../../authentication/Auth';
 
+// This class returns the component of navbar when user is not logged in.
 const NavBar = () => {
     useEffect(() => {
         const mainNav = document.querySelector(".main-nav");
@@ -27,6 +30,8 @@ const NavBar = () => {
         </header>
     );
 }
+
+// This class returns the component of signin form.
 
 class SignIn extends Component {
     constructor(props) {
