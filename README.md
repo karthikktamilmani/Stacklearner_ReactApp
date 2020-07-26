@@ -60,6 +60,33 @@ The **Learning Path** feature’s front-end is made up of a set of React compone
 ```
 The feature’s components are organised into two different set of components: `StudentDashboard` and `Curriculum`.
 
+### Devarshi Pandya
+
+#### Landing Page
+
+**Back-End Service: Landing Page**
+.
+├── express-server
+│   ├── modules
+│   │   ├── landingpage
+|   |   |   ├── landingpage.controllers.js
+|   |   |   ├── landingpage.routers.js
+│   ├── models 
+├── react-client
+
+**Front-End Components: Landing Page**
+.
+├── express-server
+├── react-client
+│   ├── src
+│   │   ├── components
+|   |   |   ├── LandingPage
+|   |   |   |   ├── Header.js
+|   |   |   |   ├── LandingPage.js
+|   |   |   |   ├── Main.js
+|   |   |   |   ├── ProjectCard.js
+|   |   |   |   ├── Testimonials.js
+
 ## Code Referencing
 No code was referenced from any online resource.
 
