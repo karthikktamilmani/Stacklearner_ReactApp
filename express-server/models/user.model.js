@@ -1,3 +1,7 @@
+// Author: Daksh Patel
+
+// Model for storing the user information
+
 const mongoose = require('mongoose');
 const userServices = require('../modules/usermanagement/user.service');
 const {Schema} = mongoose;
