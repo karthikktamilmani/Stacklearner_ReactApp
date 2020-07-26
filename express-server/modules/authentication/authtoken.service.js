@@ -1,3 +1,8 @@
+// Author: Daksh Patel
+
+// All the services related to authentication tokens
+
+
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const createResponse = require('../../globals');
@@ -93,6 +98,8 @@ function authTokenService() {
 		const [usernameOrToken, password] = credentials.split(':');
 		return usernameOrToken;
 	}
+	
+    // 	Middleware used to protect the endpoint which requires user to be logged in
 
 	const validateToken = async (req, res, next) => {
 		// console.log('getting auth token');

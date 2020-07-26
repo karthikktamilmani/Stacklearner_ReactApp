@@ -1,3 +1,9 @@
+// Author: Daksh Patel
+
+// Model for storing the authTokens and its associated user when user resets their 
+// password
+
+
 const mongoose = require('mongoose');
 // const userServices = require('./userServices');
 const {Schema} = mongoose;

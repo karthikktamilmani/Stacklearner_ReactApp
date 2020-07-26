@@ -1,3 +1,4 @@
+// Author: Daksh Patel
 import React, { Component, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Footer from '../Common/Footer';
@@ -29,6 +30,7 @@ const NavBar = () => {
     );
 }
 
+// Signup Component
 class SignUp extends Component {
     constructor(props) {
         super(props);

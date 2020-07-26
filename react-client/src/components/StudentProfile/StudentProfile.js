@@ -1,3 +1,4 @@
+// Author: Daksh Patel
 import React from 'react';
 import Header from './Header';
 import UpdateProfile from './UpdateProfile'

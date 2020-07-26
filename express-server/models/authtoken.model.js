@@ -1,3 +1,8 @@
+// Author: Daksh Patel
+
+// Model for storing the authTokens and its associated user with authToken's 
+// validity status
+
 const mongoose = require('mongoose');
 
 const {Schema} = mongoose;
