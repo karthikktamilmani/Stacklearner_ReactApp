@@ -250,16 +250,18 @@ A feature-based workflow was adopted that involved developing assigned features 
 
 Install Node.js on the local machine. Open Visual Studio Code and type the following command:
 ```
-npx create-react-app AppName
+git clone https://git.cs.dal.ca/dpandya/group17-stacklearner-a4.git
 ```
 The react application is ready to use. Type the following commands to run it on your localhost.
 ```
-cd MyApp
+npm install
 npm start
 ```
 To run backend server, execute the following command to run it on your localhost.
 ```
-node server.js
+cd express-server
+npm install
+npm start
 ```
 
 ### W3C Compliance
@@ -293,3 +295,8 @@ web: node server.js
 ```
 Connect Heroku to the GitHub repository, and deploy the app.
 
+### Code Referencing
+No code was referenced from any online resource.
+
+### Integration
+A feature-based workflow was adopted that involved developing assigned features on separated branches, and then merging them on the master branch
