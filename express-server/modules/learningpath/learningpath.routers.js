@@ -1,3 +1,5 @@
+// Author: Mansoor Ghazi
+
 // Import core dependencies
 const express = require('express');
 const authTokenService = require('../authentication/authtoken.service')();

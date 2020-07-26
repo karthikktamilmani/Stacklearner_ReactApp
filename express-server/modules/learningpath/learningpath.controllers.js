@@ -1,3 +1,5 @@
+// Author: Mansoor Ghazi
+
 /* Import code dependencies. In this case, these are 
 learning path module's data models. */
 const { Project, Module, Tutorial } = require('../../models/learningpath.models');
