@@ -65,6 +65,7 @@ The feature’s components are organised into two different set of components: `
 #### Landing Page
 
 **Back-End Service: Landing Page**
+```
 .
 ├── express-server
 │   ├── modules
@@ -73,8 +74,10 @@ The feature’s components are organised into two different set of components: `
 |   |   |   ├── landingpage.routers.js
 │   ├── models 
 ├── react-client
+```
 
 **Front-End Components: Landing Page**
+```
 .
 ├── express-server
 ├── react-client
@@ -86,6 +89,7 @@ The feature’s components are organised into two different set of components: `
 |   |   |   |   ├── Main.js
 |   |   |   |   ├── ProjectCard.js
 |   |   |   |   ├── Testimonials.js
+```
 
 ## Code Referencing
 No code was referenced from any online resource.
