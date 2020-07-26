@@ -10,19 +10,59 @@
 
 ## Features: Author's and Tasks
 
-### Your Name
+### Daksh Patel
+As a part of this assignment I was responsible for developing the complete user management feature along with authorization and authentication.
+I  have developed completely pluggable and modular code by using middleware for user authentication (backend), and protecting post-login routes by creating a wrapper component for the routes.
+#### User management
+Implemented the complete user management feature. User management feature includes the following:
 
-#### Your Feature
+* Signup
+* Signin
+* Signout
+* User Authentication
+* Update profile
+* Forgot Password
 
-**Back-End Service: Your Feature**
+**Back-End Service: user management and authentication**
+```
+The files I have worked on are as follow:
+.
+├── express-server
+│   ├──globals.js                   # added createResponse method for global usage
+│   ├── modules
+│   │   ├── authentication          # Made all the files in "./express-server/modules/authentication/*"
+│   │   ├── mailer                  # Made all the files in "./express-server/modules/mailer/*"
+│   │   ├── usermanagement          # Made all the files in "./express-server/modules/usermanagement/*"
+│   ├── models
+│   │   ├── authtoken.model.js      # Made the models file for authentication token management.
+│   │   ├── forgotpassword.model.js # Made the models file for forgot password management.
+│   │   ├── role.model.js           # Made the models file for role management.
+│   │   ├── user.model.js           # Made the models file for user information management.
 
-**Front-End Components: Your Feature**
+```
+
+**Front-End Components: User management and authentication**
+```
+The files I have worked on are as follow:
+.
+├── react-client
+│   ├── src
+│   │   ├── authentication          # Made all the files in "./react-client/src/authentication/*"
+│   │   ├── components
+│   │   │   ├── StudentProfile      # Made the following files in "./react-client/src/components/StudentProfile/"
+│   │   │   │   ├── SignUp.js
+│   │   │   │   ├── SignIn.js
+│   │   │   │   ├── StudentProfile.js
+│   │   │   │   ├── UpdateProfile.js
+└── README.md
+```
+
 
 ### Mansoor Ghazi
 As part of this assignment, I was responsible for developing, testing, and integrating the *Learning Path* feature. The feature is briefly presented in the following discussion.
 
 #### Learning Path Feature
-The **Learning Path** feature enables students to access a dashboard, that gives them access to the projects, and their tutorials. 
+The **Learning Path** feature enables students to access a dashboard, that gives them access to the projects, and their tutorials.
 
 The feature is composed of a back-end service, and a set of front-end components, the directory listings for which are presented in the following sections.
 
