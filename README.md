@@ -10,38 +10,24 @@
 
 ## Features: Author's and Tasks
 
-* [Devarshi Pandya](devarshi.pandya@dal.ca) - (Maintainer)\
-Location of implemented feature APIs - 
-```
-Landing Page
-The contents of the landing page are fetched from MongoDB and displayed in the react application.
-```
-* [Daksh Patel](dk792765@dal.ca) - (Maintainer)\
-Location of implemented feature APIs - 
-```
-Implemented the SuggestionsList component.
-```
-* [Karthik Tamil Mani](kr630601@dal.ca) - (Maintainer)\
-Location of implemented feature APIs - 
-```
-Implemented the Info component.
-```
-* [Ravi Patel](rv526909@dal.ca) - (Maintainer)\
-Location of implemented feature APIs - 
-```
-Student Progress Tracking
-This feature will enable students to track their progress across multiple learning paths, projects, and tutorials. Students will be able to resume learning from where they last left, as well as reset their progress to start afresh.
-```
-* [Mansoor Ghazi](mansoor.ghazi@dal.ca) - (Maintainer)\
+### Your Name
+
+#### Your Feature
+
+**Back-End Service: Your Feature**
+
+**Front-End Components: Your Feature**
+
+### Mansoor Ghazi
 As part of this assignment, I was responsible for developing, testing, and integrating the *Learning Path* feature. The feature is briefly presented in the following discussion.
 
-### Learning Path Feature
-The *Learning Path* feature enables students to access a dashboard, that gives them access to the projects, and their tutorials. 
+#### Learning Path Feature
+The **Learning Path** feature enables students to access a dashboard, that gives them access to the projects, and their tutorials. 
 
 The feature is composed of a back-end service, and a set of front-end components, the directory listings for which are presented in the following sections.
 
-#### Back-End Service: Learning Path Feature
-The *Learning Path* feature’s back-end includes the following directories and files:
+**Back-End Service: Learning Path Feature**
+The **Learning Path** feature’s back-end includes the following directories and files:
 ```
 |------ express-server
 	|---- modules
@@ -53,8 +39,8 @@ The *Learning Path* feature’s back-end includes the following directories and 
 ```
 As evident from above, the feature’s back-end service consists of models, controllers, and routes.
 
-#### Front-End Components: Learning Path Feature
-The *Learning Path* feature’s front-end is made up of a set of React components. These components are organised as follows:
+**Front-End Components: Learning Path Feature**
+The **Learning Path** feature’s front-end is made up of a set of React components. These components are organised as follows:
 ```
 |------ react-client
 	|---- src
