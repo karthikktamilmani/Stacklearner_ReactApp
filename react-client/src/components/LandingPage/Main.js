@@ -1,3 +1,7 @@
+// Author: Devarshi Pandya
+// Email: devarshi.pandya@dal.ca
+// Banner ID: B00840003
+
 import React, { Component } from 'react';
 import axios from '../../authentication/axios-user-management';
 import ProjectCard from './ProjectCard';

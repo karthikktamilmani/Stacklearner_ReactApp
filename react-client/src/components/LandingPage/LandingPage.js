@@ -1,3 +1,7 @@
+// Author: Devarshi Pandya
+// Email: devarshi.pandya@dal.ca
+// Banner ID: B00840003
+
 import React, { Component } from 'react';
 import Header from './Header';
 import Main from './Main';

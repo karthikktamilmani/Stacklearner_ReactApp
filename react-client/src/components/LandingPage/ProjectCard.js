@@ -1,3 +1,7 @@
+// Author: Devarshi Pandya
+// Email: devarshi.pandya@dal.ca
+// Banner ID: B00840003
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 

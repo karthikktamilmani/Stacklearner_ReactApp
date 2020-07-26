@@ -1,3 +1,7 @@
+// Author: Devarshi Pandya
+// Email: devarshi.pandya@dal.ca
+// Banner ID: B00840003
+
 // Import core dependencies
 const express = require('express');
 
