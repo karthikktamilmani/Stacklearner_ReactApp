@@ -1,6 +1,9 @@
+// Author: Daksh Patel
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// This is the header component when the user (student) is logged in.
 const Header = () => {
     return (
         <header>
