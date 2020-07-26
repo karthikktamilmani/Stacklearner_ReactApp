@@ -1,3 +1,8 @@
+// Author: Daksh Patel
+
+// All the controllers related to user management.
+
+
 const userServiceFactory = require('./user.service');
 const authTokenServiceFactory = require('../authentication/authtoken.service');
 const createResponse = require('../../globals');
