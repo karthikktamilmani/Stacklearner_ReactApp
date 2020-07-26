@@ -1,3 +1,8 @@
+// Author: Daksh Patel
+
+// All the routes related to user management
+
+
 /* eslint-disable no-param-reassign */
 const express = require('express');
 const userController = require('./user.controller');
