@@ -100,6 +100,45 @@ The **Learning Path** feature’s front-end is made up of a set of React compone
 ```
 The feature’s components are organised into two different set of components: `StudentDashboard` and `Curriculum`.
 
+### Ravi Patel
+As part of this assignment, I was responsible for developing, testing, and integrating the *Progress Tracking* feature. The feature is briefly presented in the following discussion.
+
+#### Progress Tracking Feature
+This feature will enable students to track their progress across multiple learning paths, projects, and tutorials. Students will be able to resume learning from where they last left, as well as reset their progress to start afresh.
+
+The feature is composed of a back-end service, and a set of front-end components, the directory listings for which are presented in the following sections.
+
+**Back-End Service: Progress Tracking Feature**
+```
+|------ express-server
+	|---- modules
+		|---- progresstracking
+			|---- progresstracking.controllers.js
+			|---- progresstracking.routers.js
+	|---- models
+		|--- progresstracking.models.js
+```
+
+**Front-End Components: Progress Tracking Feature**
+The **Progress Tracking** feature’s front-end is made up of a set of React components. These components are organised as follows:
+```
+|------ react-client
+	|---- src
+		|---- components
+			|---- LandingPage
+				|---- Header.js
+				|---- LandingPage.js
+				|---- Main.js
+				|---- ProjectCard.js
+				|---- Testimonials.js
+			|---- Curriculum
+				|---- Curriculum.js
+				|---- Header.js
+				|---- Main.js
+				|---- TutorialPlayer.js
+```
+The feature’s components are organised into two different set of components: `LandingPage` and `Curriculum`.
+
 ### Devarshi Pandya
 
 #### Landing Page
