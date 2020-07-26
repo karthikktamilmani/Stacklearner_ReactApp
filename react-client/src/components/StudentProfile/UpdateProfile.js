@@ -1,3 +1,5 @@
+// Author: Daksh Patel
+
 import React, { Component } from 'react';
 import auth from '../../authentication/Auth';
 import axios from '../../authentication/axios-user-management';
