@@ -69,10 +69,10 @@ The feature’s components are organised into two different set of components: `
 .
 ├── express-server
 │   ├── modules
-│   │   ├── landingpage
-|   |   |   ├── landingpage.controllers.js
-|   |   |   ├── landingpage.routers.js
-│   ├── models 
+		├── landingpage
+			├── landingpage.controllers.js
+			├── landingpage.routers.js
+	├── models 
 ├── react-client
 ```
 
@@ -81,14 +81,14 @@ The feature’s components are organised into two different set of components: `
 .
 ├── express-server
 ├── react-client
-│   ├── src
-│   │   ├── components
-|   |   |   ├── LandingPage
-|   |   |   |   ├── Header.js
-|   |   |   |   ├── LandingPage.js
-|   |   |   |   ├── Main.js
-|   |   |   |   ├── ProjectCard.js
-|   |   |   |   ├── Testimonials.js
+	├── src
+		├── components
+			├── LandingPage
+				├── Header.js
+				├── LandingPage.js
+				├── Main.js
+				├── ProjectCard.js
+				├── Testimonials.js
 ```
 
 ## Code Referencing
