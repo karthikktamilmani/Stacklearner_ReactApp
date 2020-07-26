@@ -3,6 +3,11 @@
 * Date Created: 02 07 2020
 * Last Modification Date: 25 07 2020
 
+## Getting Started
+
+* Deployment URL: https://stacklearner-a4-csci5709.herokuapp.com/
+* Repository URL: https://git.cs.dal.ca/dpandya/group17-stacklearner-a4
+
 ## Authors & Their Features
 
 * [Devarshi Pandya](devarshi.pandya@dal.ca) - (Maintainer)\
@@ -33,10 +38,6 @@ Location of implemented feature APIs -
 Implemented the Autosuggestion component and routing.
 ```
 
-## Getting Started
-
-* Deployment URL: https://stacklearner-v1.herokuapp.com/
-* Repository URL: https://git.cs.dal.ca/dpandya/a2_devarshi_pandya
 
 ### Prerequisites
 
