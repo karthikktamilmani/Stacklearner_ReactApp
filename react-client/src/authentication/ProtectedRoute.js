@@ -1,7 +1,12 @@
+// Author: Daksh Patel
+
 import React, { Component, Fragment } from "react";
 import { Redirect, withRouter } from 'react-router-dom';
 import auth from './Auth';
 
+// The protected route is a wrapper that is used to protect the routes which
+// requires the user authentication. It renders its child if and only if the 
+// user is authenticated by calling auth.isAuthenticated()
 class ProtectedRoute extends Component {
 	constructor(props) {
 		super(props);
