@@ -108,7 +108,7 @@ The feature’s components are organised into two different set of components: `
 ```
 .
 ├── express-server
-│   ├── modules
+	├── modules
 		├── landingpage
 			├── landingpage.controllers.js
 			├── landingpage.routers.js
