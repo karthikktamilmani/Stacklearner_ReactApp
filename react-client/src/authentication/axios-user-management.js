@@ -12,7 +12,7 @@ let BASE_URL;
 if (window.location.href.includes('localhost')) {
 	BASE_URL = 'http://localhost:4000';
 } else {
-	BASE_URL = "https://stacklearner-a4.herokuapp.com/";
+	BASE_URL = "https://stacklearner-backend.herokuapp.com/";
 }
 
 const axiosInstance = axios.create({
@@ -23,8 +23,7 @@ axiosInstance.interceptors.request.use((config) => {
 
 	const token = localStorage.getItem('authToken') || "";
 	const password = "";
-	const basicAuth = 'Basic ' + btoa(`${token}:${password}`)
-	config.headers.Authorization = basicAuth;
+	config.headers.Authorization = 'Basic ' + btoa(`${token}:${password}`);
 
 	return config;
 })
