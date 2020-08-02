@@ -12,7 +12,7 @@ class Auth {
 		this.authToken = localStorage.getItem("authToken") || null;
 		this.user = null;
 	}
-    
+
     // The method takes the payload and success callback as an arguement.
 	login(values, callback) {
 		const credentials = {
@@ -36,7 +36,7 @@ class Auth {
 				}
 			)
 	}
-    
+
     // The method logout takes the success callback as an argument
 
 	async logout(callback) {
@@ -51,19 +51,20 @@ class Auth {
 		}
 		return response.status === 200;
 	}
-	
-    // 	The function isAuthenticated takes in successCallback and failureCallback
-    // as arguments, and executes success callback if user is authenticated, else 
-    // executes failure callback
-    
+
+	// 	The function isAuthenticated takes in successCallback and failureCallback
+	// as arguments, and executes success callback if user is authenticated, else
+	// executes failure callback
+
 	isAuthenticated(successCallback, failureCallback) {
+		console.log(axios);
 		if (this.authenticated) {
 			successCallback();
 		} else if (this.authToken) {
 			axios.get("/usermanagement/getuser")
 				.then((res) => {
 					if (res && res.status === 200) {
-						this.authenticated=true;
+						this.authenticated = true;
 						this.user = res.data.result.user;
 						successCallback()
 					} else {
@@ -83,10 +84,10 @@ class Auth {
 					localStorage.clear();
 				})
 		} else {
-			this.user=null;
-			this.authenticated=false;
+			this.user = null;
+			this.authenticated = false;
 			failureCallback();
-			localStorage.clear();
+			// localStorage.clear();
 		}
 	}
 }

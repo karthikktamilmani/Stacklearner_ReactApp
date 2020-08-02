@@ -1,18 +1,18 @@
 // Auhtor: Mansoor Ghazi
 // Author: Ravi Patel
 
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import auth from '../../authentication/Auth';
 
 const Header = (props) => {
-    useEffect(() => {
-        const mainNav = document.querySelector(".main-nav");
-        const navbarToggle = document.querySelector(".navbar-toggle");
-        navbarToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-        });
-    });
+	useEffect(() => {
+		const mainNav = document.querySelector(".main-nav");
+		const navbarToggle = document.querySelector(".navbar-toggle");
+		navbarToggle.addEventListener('click', () => {
+			mainNav.classList.toggle('active');
+		});
+	});
 
     const { clearLocalStorage } = props;
     const { firstName } = auth.user;
@@ -21,7 +21,7 @@ const Header = (props) => {
         <header>
             <nav className="navbar dark-navbar ">
                 <span className="navbar-toggle">
-                    <i className="fas fa-bars"></i>
+                    <i className="fas fa-bars"/>
                 </span>
                 <Link to="/student/dashboard" className="logo"><i className="logo-icon fas fa-terminal"></i>stacklearner</Link>
                 <ul className="main-nav">

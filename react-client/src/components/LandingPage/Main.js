@@ -2,48 +2,48 @@
 // Email: devarshi.pandya@dal.ca
 // Banner ID: B00840003
 
-import React, { Component } from 'react';
-import axios from '../../authentication/axios-user-management';
+import React, {Component} from 'react';
+import axios from 'axios';
 import ProjectCard from './ProjectCard';
 import Loading from '../Common/Loading';
 import Testimonials from './Testimonials';
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            projects: [],
-            error: false
+	constructor(props) {
+		super(props);
+		this.state = {
+			projects: [],
+			error: false
         };
     }
 
     getAllProjects = () => {
-        axios.get('landingpage/projects').then((res) => {
-            if (res.status === 200) {
-                this.setState({
-                    projects: res.data
-                });
-            }
-        }).catch((err) => {
+			axios.get('http://localhost:4000/landingpage/projects').then((res) => {
+				if (res.status === 200) {
+					this.setState({
+						projects: res.data
+					});
+				}
+			}).catch((err) => {
             this.setState({
                 error: true
             })
         });
     }
-    
+
     setBackgroundColors = (projects) => {
         const backgroundColorsBaseList = ['pink-background', 'blue-background', 'green-background', 'orange-background'];
         const numberOfProjects = projects.length;
         const projectsAfterWhichToLoop = Math.ceil(numberOfProjects / 4);
-    
-        let counter = 0;
+
+			let counter = 0;
         let backGroundColorsArray = [];
         while (counter < projectsAfterWhichToLoop) {
             backGroundColorsArray = backgroundColorsBaseList.concat(backgroundColorsBaseList);
             counter++;
         }
-            
-        return backGroundColorsArray;
+
+			return backGroundColorsArray;
     }
 
     displayProjectCards = (projects) => {
@@ -54,8 +54,9 @@ class Main extends Component {
     }
 
     componentDidMount() {
-        this.getAllProjects();
-    }
+			// This should run
+			this.getAllProjects();
+		}
 
     render() {
         const { projects } = this.state;

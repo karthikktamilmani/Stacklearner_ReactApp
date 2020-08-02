@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 import ProtectedRoute from './authentication/ProtectedRoute';
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -10,8 +10,7 @@ import "jquery/dist/jquery.min.js";
 
 import './reflex.css';
 import './App.scss';
-
-// Page Level Components
+// Page Level Component
 import LandingPage from './components/LandingPage/LandingPage';
 import SignIn from './components/StudentProfile/SignIn';
 import SignUp from './components/StudentProfile/SignUp';
