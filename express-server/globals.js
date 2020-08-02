@@ -4,4 +4,5 @@ const createResponse = (message, result) => {
 		result: result
 	}
 }
+// updated test
 module.exports = createResponse;
