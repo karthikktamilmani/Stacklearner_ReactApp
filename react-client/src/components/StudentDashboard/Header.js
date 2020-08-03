@@ -38,6 +38,9 @@ const Header = (props) => {
 						<div style={styles.fadeIn}>
 							<div className="collapse navbar-collapse" id="navbarNavDropdown">
 								<ul className="main-nav navbar-nav ml-auto">
+									{auth.user.roles.length > 1 ?
+										<li className="nav-item"><Link to={"/instructor/dashboard"} className="nav-links mr-3">View as
+											instructor</Link></li> : null}
 									<li className="nav-item"><a onClick={() => auth.logout(clearLocalStorage)} href="#"
 																							className="nav-links mr-3">Sign Out</a></li>
 									<li className="nav-item dropdown">

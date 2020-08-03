@@ -32,7 +32,7 @@ function authTokenService() {
 	const verifyToken = (err, user, req, res, next) => {
 		// console.log('verifyToken');
 		//console.log(req);
-		const currentRequestUrl = req.route.path;
+		const currentRequestUrl = req.originalUrl;
 		let resp;
 		if (err) {
 			resp = createResponse(err, {});
@@ -48,17 +48,25 @@ function authTokenService() {
 						res.status(500);
 						return res.json(resp);
 					}
+					// console.log('isnide exec');
 					if (authToken && authToken.isActive) {
-						if (currentRequestUrl.indexOf('instructor') !== -1) {
+						// console.log('inside authtoken exec');
+						// console.log(req);
+						// console.log(currentRequestUrl);
+						// console.log(currentRequestUrl.indexOf('instructionmanagement'));
+						if (currentRequestUrl.indexOf('instructionmanagement') !== -1) {
+							console.log("roles", user.roles);
 							if (user.roles.map(role => role['role']).includes('instructor')) {
+								// console.log('going next');
 								next();
 							} else {
+								// console.log('not authorized');
 								resp = createResponse('Unauthorized access', {});
 								res.status(401);
 								return res.json(resp);
 							}
 						} else {
-							// console.log('going next');
+							// console.log('going next66');
 							next();
 						}
 					} else {

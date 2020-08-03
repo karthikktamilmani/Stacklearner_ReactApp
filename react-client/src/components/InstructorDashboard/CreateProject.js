@@ -44,7 +44,7 @@ class CreateProject extends Component {
     }
 
     saveProject = async (project) => {
-        return await axios.post('/instructionmanagement/projects/createproject', project, { headers: {'Content-Type': 'multipart/form-data' } });
+        return await axios.post('/instructionmanagement/projects/createproject', project);
     }
 
     resetForm = () => {
@@ -64,20 +64,17 @@ class CreateProject extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
 
-        const { projectImageURL } = this.state;
-        const formData = new FormData(document.getElementById("create-project-form"));
-        formData.append('projectImageURL', projectImageURL);
+			const project = this.state;
 
-        this.saveProject(formData).then((result) => {
-            if (result.status === 201) {
-                console.log('Project created.');
-                this.setState({
-                    saved: true
-                });
-                this.resetForm();
-            }
-            else this.setState({ error: true });
-        }).catch(() => {
+			this.saveProject(project).then((result) => {
+				if (result.status === 201) {
+					console.log('Project created.');
+					this.setState({
+						saved: true
+					});
+					this.resetForm();
+				} else this.setState({error: true});
+			}).catch(() => {
             this.setState({
                 error: true
             });
@@ -115,7 +112,7 @@ class CreateProject extends Component {
 
 
     render() {
-        const { projectNumber, projectTitle, projectDescription, projectDemoLink, projectLengthHours, projectLengthMinutes, projectAccessLevel } = this.state;
+			const {projectNumber, projectImageURL, projectTitle, projectDescription, projectDemoLink, projectLengthHours, projectLengthMinutes, projectAccessLevel} = this.state;
 
         return (
             <>
@@ -154,17 +151,19 @@ class CreateProject extends Component {
                                                 <label htmlFor="project-length-minutes">Length (Minutes)</label>
                                                 <input type="number" name="projectLengthMinutes" id="project-length-minutes" onChange={this.handleChange} value={projectLengthMinutes} min="0" required />
                                             </div>
-                                            <div className="form-controls-group-inner">
-                                                <label htmlFor="project-access-level">Access Level</label>
-                                                <select id="project-access-level" name="projectAccessLevel" onChange={this.handleChange} value={projectAccessLevel} required>
-                                                    <option value="free">Free</option>
-                                                    <option value="pro">Pro</option>
-                                                </select>
-                                            </div>
-                                            <div className="form-controls-group-inner">
-                                                <label htmlFor="project-image">Demo Image</label>
-                                                <input type="file" onChange={this.handleFileChange} accept="image/png, image/jpeg, image/jpg" required />
-                                            </div>
+																					<div className="form-controls-group-inner">
+																						<label htmlFor="project-access-level">Access Level</label>
+																						<select id="project-access-level" name="projectAccessLevel"
+																										onChange={this.handleChange} value={projectAccessLevel} required>
+																							<option value="free">Free</option>
+																							<option value="pro">Pro</option>
+																						</select>
+																					</div>
+																					<div className="form-controls-group-inner">
+																						<label htmlFor="project-image">Demo Image URL</label>
+																						<input type="text" onChange={this.handleChange} value={projectImageURL}
+																									 name="projectImageURL" required/>
+																					</div>
                                         </div>
                                     </fieldset>
                                     <div className="form-button-container">

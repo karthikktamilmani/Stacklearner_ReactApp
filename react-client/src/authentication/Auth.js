@@ -86,7 +86,7 @@ class Auth {
 	// executes failure callback
 
 	isAuthenticated(successCallback, failureCallback) {
-		console.log(axios);
+		// console.log(axios);
 		if (this.authenticated) {
 			successCallback();
 		} else if (this.authToken) {
