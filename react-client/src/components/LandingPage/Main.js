@@ -19,6 +19,7 @@ class Main extends Component {
 
     getAllProjects = () => {
 			axios.get('/landingpage/projects').then((res) => {
+				console.log(res);
 				if (res.status === 200) {
 					this.setState({
 						projects: res.data
