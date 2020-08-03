@@ -236,6 +236,17 @@ hr.thick {
   margin-bottom: 1.25rem;
 }
 
+hr.thin {
+  background-color: #3722d3;
+  border: none;
+  border-radius: 4px;
+  height: 4px;
+  width: 75px;
+  text-align: left;
+  margin-top: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
 
 /* Links and Button Styles */
 
@@ -724,8 +735,8 @@ section {
   margin-bottom: 1rem;
 }
 
-.project-card-controls-container > p {
-  font-size: 0.75rem;
+.project-card-controls-container p {
+  font-size: 0.75rem !important;
 }
 
 
@@ -941,16 +952,25 @@ legend {
   margin-bottom: 0.5rem;
 }
 
-.form-controls-group-inner input {
+.form-controls-group-inner input, .form-controls-group-inner select {
   font-family: inherit;
   font-size: inherit;
   color: #576366;
-  padding-left: 0.25rem;
-  padding-right: 0.25rem;
+  padding: 0.5rem;
   border: 2px solid #EFEEFD;
   border-radius: 4px;
   height: 40px;
   width: 100%;
+}
+
+.form-controls-group-inner input[type="file"] {
+  font-family: inherit;
+  font-size: inherit;
+  color: #576366;
+  padding: 0.5rem 0;
+  border: none;
+  border-radius: 4px;
+  height: 40px;
 }
 
 .form-controls-group-inner textarea {
@@ -1273,4 +1293,211 @@ blockquote footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+/* Instructor Dashboard Styles */
+
+.instructor-dashboard-container .create-project-button-container {
+  margin-top: 2rem;
+}
+
+.create-project-button i {
+  margin-right: 0.25rem;
+  font-size: 0.85rem;
+  margin-top: -2px;
+}
+
+.instructor-project-card-container h4 {
+  margin-bottom: 1rem;
+}
+
+.instructor-project-card-container p {
+  font-size: 0.95rem;
+}
+
+.instructor-project-card-container .project-card-controls-container {
+  margin-top: 2rem;
+}
+
+.instructor-project-card-container .project-card-controls-container .button, .instructor-project-card-container .project-card-controls-container .text-button {
+  font-size: 0.75rem;
+}
+
+/* Instructor Create Project Styles */
+
+.create-update-project-form-container {
+  padding: 2rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #EFEEFD;
+  border-top: none;
+  box-shadow: 0px 2px 2px -2px rgba(0, 0, 0, .2);
+  background-color: #fff;
+}
+
+.create-update-project-form-container > h1 {
+  font-size: 1.44rem;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.create-update-project-form-container > form {
+  padding-bottom: 1.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.create-update-project-form-container .form-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create-update-project-form-container .form-controls-group-inner {
+  width: 100%;
+}
+
+.create-update-project-form-container textarea {
+  height: 90px;
+}
+
+/* Add - Edit Curriculum Styles */
+
+.add-edit-curriculum-section .back-button-container {
+  padding: 0 0 0.5rem;
+}
+
+.add-edit-curriculum-container {
+  padding: 2rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #EFEEFD;
+  border-top: none;
+  box-shadow: 0px 2px 2px -2px rgba(0, 0, 0, .2);
+  background-color: #fff;
+}
+
+.add-module-form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.add-module-form input {
+  font-family: inherit;
+  font-size: inherit;
+  color: #576366;
+  padding: 0.5rem;
+  border: 2px solid #EFEEFD;
+  border-radius: 4px;
+  height: 40px;
+  width: 90%;
+}
+
+.add-module-form button {
+  width: 10%;
+  font-size: inherit;
+  font-family: inherit;
+  border: none;
+  background: transparent;
+}
+
+.add-module-form button i {
+  font-size: 2rem;
+}
+
+.module-card-container {
+  margin-bottom: 0.75rem;
+  border: 2px solid #EFEEFD;
+  border-radius: 4px;
+  padding: 0;
+}
+.module-card-controls-container {
+  font-size: 0.90rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.tutorial-card-container {
+  font-size: 0.85rem;
+  border-bottom: 1px solid #EFEEFD;
+}
+
+.tutorial-card-container i {
+  margin-left: 0.5rem;
+  margin-top: 1px;
+
+.authentication-form-container,
+.forgotpassword-form-container {
+    padding: 2rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #EFEEFD;
+    border-top: none;
+    box-shadow: 0px 2px 2px -2px rgba(0, 0, 0, .2);
+    background-color: #fff;
+}
+
+.authentication-form-container>h1,
+.forgotpassword-form-container>h1 {
+    font-size: 1.44rem;
+    text-align: center;
+    margin-bottom: 0.75rem;
+}
+
+.authentication-form-container>form,
+.forgotpassword-form-container>form {
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.authentication-form-container .form-button-container,
+.forgotpassword-form-container .form-button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+/* Discussion styles */
+
+.discussions-wrapper {
+    .media-left {
+        i {
+            font-size: 20px;
+        }
+    }
+    textarea.form-control {
+        height: auto;
+        color: #576366;
+        background-color: #f8f8fb;
+        border: 2px solid #EFEEFD;
+    }
+    p {
+        font-size: 15px;
+        line-height: 1.45rem;
+    }
+    .discussion-period {
+        font-size: 12px;
+        color: #b0b0bf;
+    }
+    .options {
+        .like-icon,
+        .btn,
+        .like {
+            font-size: 0.85rem;
+        }
+        .like-icon {
+            cursor: pointer;
+            color: $primary-color;
+        }
+        .separator {
+            font-size: 0.65rem;
+            margin-left: 0.75rem;
+        }
+    }
+}
+
+.form-button-container-last {
+    display: flex;
+    margin-top: 2rem;
+    justify-content: end;
 }
