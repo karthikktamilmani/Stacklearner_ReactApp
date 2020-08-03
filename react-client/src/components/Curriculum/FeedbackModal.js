@@ -78,9 +78,7 @@ class FeedbackModal extends Component {
 							Close
 						</Button>
 						<Button variant="primary" onClick={() => {
-							console.log('onsubmit');
 							if (this.state.comments.trim().length > 0) {
-								console.log('inside if');
 								this.setState({
 									error: false,
 									success: true,

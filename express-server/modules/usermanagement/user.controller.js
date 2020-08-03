@@ -114,7 +114,7 @@ function userController() {
 
 		User.findOne(query)
 			.populate('roles')
-			.exec((err, user) => {
+			.exec(async (err, user) => {
 				if (err) {
 					resp = createResponse(err, {});
 					res.status(500);
@@ -123,10 +123,12 @@ function userController() {
 
 				if (user) {
 					const validCreds = userService.verifyPassword(req.body.password, user.password);
-					const currentTime = Math.floor(Date.now() / 1000);
+					const currentTime = Math.floor(Date.now());
 					const retryTime = new Date(user.retryAfter).getTime();
+					console.log("Current TIme:", currentTime, new Date(currentTime));
+					console.log("Retry time:", retryTime, new Date(retryTime));
 					if (user.unSuccessfulLoginAttempt > 5 && currentTime < retryTime) {
-						let retrySeconds = retryTime - currentTime;
+						let retrySeconds = Math.floor((retryTime - currentTime) / 1000);
 						let minutes = Math.floor(retrySeconds / 60);
 						let seconds = retrySeconds - minutes * 60;
 						let result = {
@@ -152,6 +154,10 @@ function userController() {
 							"user": user,
 							"authToken": authToken
 						}
+						if (user.unSuccessfulLoginAttempt > 0) {
+							user.unSuccessfulLoginAttempt = 0;
+							user = await user.save();
+						}
 						resp = createResponse("Login Successful", result);
 						res.status(201);
 
@@ -163,7 +169,7 @@ function userController() {
 							user.unSuccessfulLoginAttempt += 1;
 						} else {
 							user.unSuccessfulLoginAttempt += 1;
-							user.retryAfter = currentTime + 600;
+							user.retryAfter = currentTime + 600000;
 						}
 						user.save((err) => {
 							if (err) {

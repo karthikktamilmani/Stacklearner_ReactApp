@@ -26,9 +26,11 @@ function App() {
 	return (
 		<>
 			<Switch>
+				{/*<CheckLogin>*/}
 				<Route exact path="/" component={LandingPage}/>
 				<Route exact path="/signin" component={SignIn}/>
 				<Route exact path="/signup" component={SignUp}/>
+				{/*</CheckLogin>*/}
 				<Route exact path="/forgotpassword" component={ForgotPassword}/>
 				<Route exact path="/changepassword" component={ChangePassword}/>
 				<ProtectedRoute>
