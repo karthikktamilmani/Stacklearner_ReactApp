@@ -13,6 +13,7 @@ class StudentDashboard extends Component {
 		this.props.history.push('/');
 	}
 
+
 	render() {
 		return (
 			<>

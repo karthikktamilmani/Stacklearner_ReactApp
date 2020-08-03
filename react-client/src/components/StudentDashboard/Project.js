@@ -52,6 +52,7 @@ const Project = ({_id, projectTitle, projectNumber, projectDemoLink, projectLeng
 			</div>
 			// </StyleRoot>
 
+
 		)
 	} else return <Spinner/>;
 

@@ -10,26 +10,26 @@ const authTokenServices = require('../authentication/authtoken.service');
 
 // Import controllers
 const {
-  toggleLikes,
-  addNewComment,
-  addNewDiscussion,
-  getAllDiscussions
+	toggleLikes,
+	addNewComment,
+	addNewDiscussion,
+	getAllDiscussions
 } = require('./discussion.controllers');
 
 // Revealing module pattern
 const router = () => {
-  const discussionRouter = express.Router();
-  const authTokenService = authTokenServices();
+	const discussionRouter = express.Router();
+	const authTokenService = authTokenServices();
 
-  discussionRouter.route('/details').get(getAllDiscussions);
+	discussionRouter.route('/details').get(getAllDiscussions);
 
-  discussionRouter.route('/details').post(addNewDiscussion);
+	discussionRouter.route('/details').post(addNewDiscussion);
 
-  discussionRouter.route('/likes').post(toggleLikes);
+	discussionRouter.route('/likes').post(toggleLikes);
 
-  discussionRouter.route('/comment').post(addNewComment);
+	discussionRouter.route('/comment').post(addNewComment);
 
-  return discussionRouter;
+	return discussionRouter;
 }
 
 

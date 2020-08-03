@@ -5,6 +5,7 @@ import {BrowserRouter} from 'react-router-dom';
 // console.log = ()=>{}
 console.warn = () => {
 }
+
 ReactDOM.render(
 	<BrowserRouter>
 		<App/>

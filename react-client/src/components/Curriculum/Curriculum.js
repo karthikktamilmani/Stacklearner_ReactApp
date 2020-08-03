@@ -15,10 +15,11 @@ class Curriculum extends Component {
     render() {
         return (
             <>
+
 							<Header clearLocalStorage={this.clearLocalStorage}/>
 							<Main projectID={this.props.match.params.projectID} history={this.props.history}/>
 							<Footer/>
-            </>
+						</>
         );
     }
 }

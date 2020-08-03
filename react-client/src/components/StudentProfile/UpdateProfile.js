@@ -160,6 +160,7 @@ class UpdateProfile extends Component {
 			</>
 		);
 	}
+
 }
 
 export default UpdateProfile;

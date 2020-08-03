@@ -6,6 +6,7 @@
 
 import axios from "./axios-user-management";
 
+
 class Auth {
 	constructor() {
 		this.authenticated = false;

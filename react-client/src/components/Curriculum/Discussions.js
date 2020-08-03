@@ -118,7 +118,7 @@ class Discussions extends Component {
 									name="newDiscussion"
 									value={newDiscussion}
 									onChange={this.handleChange}
-								></textarea>
+								/>
 								<div className="btn-toolbar mt-3 justify-content-end">
 									<button
 										className="button button-medium button-green-outline"

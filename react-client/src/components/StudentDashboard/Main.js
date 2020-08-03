@@ -15,6 +15,7 @@ const styles = {
 }
 
 const Main = (props) => {
+
 	const {firstName} = props;
 	return (
 		<StyleRoot>

@@ -7,6 +7,7 @@ import auth from '../../authentication/Auth';
 import {fadeIn} from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
 
+
 const styles = {
 	fadeIn: {
 		animation: 'x 1s',

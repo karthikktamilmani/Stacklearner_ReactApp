@@ -14,6 +14,7 @@ import axios from "../../authentication/axios-user-management";
 import {bounceInUp, fadeIn, fadeInUp} from 'react-animations';
 import Radium, {StyleRoot} from 'radium';
 
+
 const styles = {
 	fadeIn: {
 		animation: 'x 1s',
