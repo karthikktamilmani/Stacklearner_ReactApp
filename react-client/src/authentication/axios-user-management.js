@@ -14,6 +14,7 @@ if (window.location.href.includes('localhost')) {
 } else {
 	BASE_URL = "https://stacklearner-backend.herokuapp.com/";
 }
+console.log(BASE_URL);
 
 const axiosInstance = axios.create({
 	baseURL: BASE_URL
