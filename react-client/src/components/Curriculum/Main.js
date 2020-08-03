@@ -8,6 +8,31 @@ import TutorialPlayer from './TutorialPlayer';
 import Loading from '../Common/Loading';
 import Discussions from './Discussions';
 import FeedbackModal from "./FeedbackModal";
+import {bounceInUp, fadeIn, fadeInLeft, fadeInRight, fadeInUp} from 'react-animations';
+import Radium, {StyleRoot} from 'radium';
+
+const styles = {
+	fadeIn: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeIn, 'fadeIn')
+	},
+	bounceInUp: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(bounceInUp, 'bounceInUp')
+	},
+	fadeInUp: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeInUp, 'fadeInUp')
+	},
+	fadeInLeft: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeInLeft, 'fadeInLeft')
+	},
+	fadeInRight: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeInRight, 'fadeInRight')
+	}
+}
 
 const Tutorial = (props) => {
 	const {tutorial, handleClick, currentTutorialID, finishedTutorials} = props;
@@ -24,6 +49,7 @@ const Tutorial = (props) => {
 	return <li data-tutorialid={tutorial._id} onClick={(event) => handleClick(event)}><i
 		className={tutorialPlayerIcon}/> {tutorial.tutorialTitle}</li>
 }
+
 
 const Module = (props) => {
 	const {title, moduleTutorials, handleClick, currentTutorialID, finishedTutorials} = props;
@@ -50,8 +76,19 @@ class Main extends Component {
 			statusCode: '',
 			tutorials: [],
 			finishedTutorials: [],
-			showFeedbackModal: false
+			showFeedbackModal: false,
+			showDiscussions: false,
+			showDiscussionLoading: true
 		}
+	}
+
+	discussionVisibilityHandler = (show) => {
+		console.log(show);
+		this.setState({
+			showDiscussions: show,
+			showDiscussionLoading: !show
+		});
+		console.log(this.state);
 	}
 
 	componentDidMount() {
@@ -273,7 +310,10 @@ class Main extends Component {
 						<div className="grid">
 							<div className="col-md-9 col-sm-12 video-embed-container">
 								{tutorials.length > 0 && currentTutorialID ? <TutorialPlayer tutorialID={currentTutorialID}/> :
-									<img src="/images/loading.gif" width="100%" height="auto" alt="Some"/>}
+									<div className="img-loader">
+										<img src="/images/loading.gif" width="100%" height="auto" alt="Some"/>
+									</div>
+								}
 								<div className="tutorial-controls">
 									<button type="button" className="button button-medium button-accent-outline back-button"
 													aria-label="Previous tutorial" onClick={this.navigateToLastTutorial}><i
@@ -281,24 +321,38 @@ class Main extends Component {
 									</button>
 									<button type="button" className="button button-medium button-green-outline"
 													aria-label="Previous tutorial" onClick={this.navigateToNextTutorial}>Next<i
-										className="fas fa-angle-right"></i></button>
+										className="fas fa-angle-right"/></button>
 								</div>
 							</div>
 							<div className="col-md-3 col-sm-12 tutorials-list-container dark-accent-background">
-								<nav aria-label="List of tutorials">
-									{
-										moduleTitleKeys.map((moduleTitleKey, index) => {
-											return <Module key={index} title={moduleTitleKey} moduleTutorials={modulesObject[moduleTitleKey]}
-																		 handleClick={this.handleClick} currentTutorialID={currentTutorialID}
-																		 finishedTutorials={finishedTutorials}/>
-										})
-									}
-								</nav>
+								<StyleRoot>
+									<div style={styles.fadeInRight}>
+										<nav aria-label="List of tutorials">
+											{
+												moduleTitleKeys.map((moduleTitleKey, index) => {
+													return <Module key={index} title={moduleTitleKey}
+																				 moduleTutorials={modulesObject[moduleTitleKey]}
+																				 handleClick={this.handleClick} currentTutorialID={currentTutorialID}
+																				 finishedTutorials={finishedTutorials}/>
+												})
+											}
+										</nav>
+									</div>
+								</StyleRoot>
+
 							</div>
 						</div>
 						<div className="grid">
 							<div className="col-md-9 col-sm-12 discussions-wrapper">
-								<Discussions projectID={this.props.projectID}/>
+
+								{this.state.showDiscussionLoading ? <Loading message="Loading Discussions.. Please wait.."/> : null}
+								<StyleRoot>
+									<div style={styles.fadeInUp}>
+										<Discussions projectID={this.props.projectID}
+																 discussionVisibility={this.discussionVisibilityHandler}/>
+									</div>
+								</StyleRoot>
+
 							</div>
 						</div>
 					</div>

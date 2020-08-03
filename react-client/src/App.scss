@@ -744,25 +744,31 @@ section {
 }
 
 .video-embed-container {
-    padding-top: 0;
-    padding-bottom: 0;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
-.video-embed-container>video {
-    width: 100% !important;
-    height: auto !important;
-    margin: 0 auto !important;
+.video-embed-container > video {
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 auto !important;
+}
+
+.img-loader > img {
+  width: 100% !important;
+  height: auto !important;
+  margin: 0 auto !important;
 }
 
 .tutorial-controls {
-    padding: 1rem 0rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  padding: 1rem 0rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 @media screen and (max-width: 768px) {
-    .tutorial-controls a,
+  .tutorial-controls a,
     .tutorial-controls button {
         font-size: 0.75rem;
     }
