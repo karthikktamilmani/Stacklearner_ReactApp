@@ -67,7 +67,15 @@ class SignIn extends Component {
 
 	failureCallback = (error) => {
 		console.log(error.response);
-		this.setState({error: true, message: error.response.data.message})
+		let message;
+		const {retryTime} = error.response.data.result;
+		if (retryTime) {
+			message = `${error.response.data.message} Please try again${'  '}after ${retryTime.minutes} minutes and ${retryTime.seconds} seconds.`;
+		} else {
+			message = error.response.data.message;
+		}
+		this.setState({error: true, message: message});
+
 	}
 
 	handleSubmit = (event) => {
@@ -89,7 +97,9 @@ class SignIn extends Component {
 		banner.classList.remove('visible');
 		banner.classList.add('hidden');
 		this.setState({
-			updated: 'NotYet'
+			error: false,
+			success: false,
+			message: ""
 		});
 	}
 
@@ -124,10 +134,7 @@ class SignIn extends Component {
 									</fieldset>
 									<div className="form-button-container">
 										<button type="submit" className="button button-medium button-accent-outline">Sign In</button>
-										<div className="banner-container">
-											{/*<p*/}
-											{/*	className={this.state.success ? "visible flash-banner green-background" : "hidden"}>{this.state.message}<i*/}
-											{/*	className="fas fa-times" onClick={this.closeBanner}/></p>*/}
+										<div className="banner-container w-50">
 											<p
 												className={this.state.error ? "visible flash-banner pink-background" : "hidden"}>{this.state.message}<i
 												className="fas fa-times" onClick={this.closeBanner}/></p>

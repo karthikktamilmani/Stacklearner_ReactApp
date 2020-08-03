@@ -4,6 +4,7 @@ import React, {Component, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import Footer from '../Common/Footer';
 import auth from '../../authentication/Auth';
+import Loading from "../Common/Loading";
 
 // This class returns the component of navbar when user is not logged in.
 const NavBar = () => {
@@ -42,7 +43,8 @@ class ChangePassword extends Component {
 			confirmPassword: '',
 			error: false,
 			success: false,
-			message: ""
+			message: "",
+			showLoading: false
 		}
 		// this.passwordField = React.createRef();
 		this.toggleButton = React.createRef();
@@ -50,12 +52,23 @@ class ChangePassword extends Component {
 
 	successCallback = (response) => {
 		console.log(response);
-		this.setState({
-			success: true,
-			message: response.data.message,
-			error: false
-		});
-		setTimeout(() => this.props.history.push('/signin'), 1000);
+		setTimeout(() => {
+			this.setState({
+				showLoading: true
+			});
+			setTimeout(() => {
+				this.setState({
+					success: true,
+					message: response.data.message,
+					error: false,
+					showLoading: false
+				});
+			}, 1000);
+		}, 500);
+		setTimeout(() => {
+			// this.setState({showLoading: true});
+			this.props.history.push('/signin')
+		}, 2000);
 	}
 
 	failureCallback = (error) => {
@@ -134,6 +147,10 @@ class ChangePassword extends Component {
 														disabled={this.state.success}>Submit
 										</button>
 										<div className="banner-container">
+											{
+												this.state.showLoading ? <p><Loading message="Processing..."/></p> : null
+
+											}
 											<p
 												className={this.state.success ? "visible flash-banner green-background" : "hidden"}>{this.state.message}<i
 												className="fas fa-times" onClick={this.closeBanner}/></p>
