@@ -12,6 +12,7 @@ const progressTrackingModuleRouter = require('./modules/progresstracking/progres
 const userManagementModuleRouter = require('./modules/usermanagement/user.router')();
 const paymentModuleRouter = require('./modules/payment/payment.routers')();
 const feedbackManagementRouter = require('./modules/feedbackmanagement/feedbackmanagement.router')();
+const fileManagementModuleRouters = require('./modules/filemanagement/filemanagement.routers')();
 const discussionModuleRouter = require('./modules/discussion/discussion.routers')();
 
 // Setup express app and middleware
@@ -31,6 +32,7 @@ app.use('/trackprogress', progressTrackingModuleRouter);
 app.use('/usermanagement', userManagementModuleRouter);
 app.use('/payment', paymentModuleRouter);
 app.use('/feedback', feedbackManagementRouter);
+app.use('/public', fileManagementModuleRouters);
 app.use('/discussion', discussionModuleRouter);
 
 // Start server and listen to incoming requests

@@ -83,7 +83,7 @@ class SignIn extends Component {
 		const user = this.state;
 		auth.login(user, this.successCallback, this.failureCallback);
 	}
-
+  
 	handleChange = (event) => {
 		const value = event.target.value;
 		const name = event.target.name;
