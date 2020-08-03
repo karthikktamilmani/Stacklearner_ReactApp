@@ -92,7 +92,7 @@ class ForgotPassword extends Component {
 		banner.classList.add('hidden');
 		this.setState({
 			updated: 'NotYet'
-		});
+		})
 	}
 
 	render() {
