@@ -1,70 +1,71 @@
-// Author: Mansoor Ghazi
-
-// Import core dependencies
+// Import dependencies
 const express = require('express');
+const { getAllProjects, getProjectsCount, getOneProject, createProject, updateProject,  deleteProject, getAllModules, getOneModule,
+        createModule, updateModule, deleteModule, getAllTutorials, getOneTutorial, createTutorial,
+        updateTutorial, deleteTutorial } = require('./instructionmanagement.controllers');
+const { fileUploader } = require('../filemanagement/filemanagement.middlewares');
 
-// Import controllers
-const {getAllProjects, getOneProject, createProject, updateProject, deleteProject, getAllModules, createModule, updateModule, deleteModule, createTutorial, getOneTutorial, getTutorialsOfModule, getTutorialsOfProject, getOneTutorialOfProject} = require('./instructionmanagement.controllers');
+// Function for revealing module pattern
+const instructionManagementRouter = () => {
+    // Instantiate express router
+    const router = express.Router();
 
-// Revealing module pattern
-const router = () => {
-	// Instantiate express router for learning path module
-	const instructionManagementRouter = express.Router();
+    // PROJECT RESOURCE Routes
 
-	// PROJECT ROUTES
+    // Setup route - GET all projects from DB
+    router.route('/projects').get((req, res) => getAllProjects(req, res));
+    
+    // Setup route - GET total number of projects from DB
+    router.route('/projects/count').get((req, res) => getProjectsCount(req, res));
 
-	// Route to GET all projects from DB
-	instructionManagementRouter.route('/projects').get((req, res) => getAllProjects(req, res));
+    // Setup route - GET one project from DB
+    router.route('/projects/:projectID').get((req, res) => getOneProject(req, res));
 
-	// Route to GET a single project and its curriculum from DB
-	instructionManagementRouter.route('/projects/:projectID').get((req, res) => getOneProject(req, res));
+    // Setup route - POST project to DB
+    router.route('/projects/createproject').post(fileUploader.single("projectImageURL"), (req, res) => createProject(req, res))
 
-	// Route to create a new project via a POST request
-	instructionManagementRouter.route('/createproject').post((req, res) => createProject(req, res));
+    // Setup route - PATCH (update) project
+    router.route('/projects/:projectID/updateproject').patch(fileUploader.single("projectImageURL"), (req, res) => updateProject(req, res));
 
-	// Route to update a project via a PATCH request
-	instructionManagementRouter.route('/updateproject/:projectID').patch((req, res) => updateProject(req, res));
+    // Setup route - DELETE project
+    router.route('/projects/:projectID/deleteproject').delete((req, res) => deleteProject(req, res));
 
-	// Route to delete a project via a DELETE request
-	instructionManagementRouter.route('/deleteproject/:projectID').delete((req, res) => deleteProject(req, res))
+    // MODULE RESOURCE Routes
 
-	// MODULE ROUTES
+    // Setup route - GET all modules ot a project from DB
+    router.route('/projects/:projectID/modules').get((req, res) => getAllModules(req, res));
 
-	// Route to get all modules of a project via a GET request
-	instructionManagementRouter.route('/projects/:projectID/modules').get((req, res) => getAllModules(req, res));
+    // Setup route - GET one module from DB
+    router.route('/modules/:moduleID').get((req, res) => getOneModule(req, res));
 
-	// Route to create a new module for a project via a POST request
-	instructionManagementRouter.route('/projects/:projectID/createmodule').post((req, res) => createModule(req, res));
+    // Setup route - POST module to DB
+    router.route('/modules/createmodule').post((req, res) => createModule(req, res));
 
-	// Route to update a module via a PATCH request
-	instructionManagementRouter.route('/updatemodule/:moduleID').patch((req, res) => updateModule(req, res));
+    // Setup route - PATCH (update) module
+    router.route('/modules/:moduleID/updatemodule').patch((req, res) => updateModule(req, res));
 
-	// Route to delete a module via a DELETE request
-	instructionManagementRouter.route('/deletemodule/:moduleID').delete((req, res) => deleteModule(req, res));
+    // Setup route - DELETE module
+    router.route('/modules/:moduleID/deletemodule').delete((req, res) => deleteModule(req, res));
 
-	// TUTORIAL ROUTES
+    // TUTORIAL RESOURCE Routes
 
-	// Route to get a tutorial from DB via a GET request
-	instructionManagementRouter.route('/tutorials/:tutorialID').get((req, res) => getOneTutorial(req, res));
+    // Setup route - GET tutorials of module
+    router.route('/modules/:moduleID/tutorials').get((req, res) => getAllTutorials(req, res));
 
-	// Route to get all tutorials of a module via a GET request
-	instructionManagementRouter.route('/modules/:moduleID/tutorials').get((req, res) => {
-		getTutorialsOfModule(req, res);
-	});
+    // Setup route - GET one tutorial
+    router.route('/tutorials/:tutorialID').get((req, res) => getOneTutorial(req, res));
 
-	// Route to get all tutorials of a project via a GET request
-	instructionManagementRouter.route('/projects/:projectID/tutorials').get((req, res) => {
-		getTutorialsOfProject(req, res);
-	});
+    // Setup route - POST tutorial
+    router.route('/tutorials/createtutorial').post((req, res) => createTutorial(req, res));
 
-	// Route to get a project's tutorial from the DB via a GET request
-	instructionManagementRouter.route('/projects/:projectID/tutorials/:tutorialID').get((req, res) => getOneTutorialOfProject(req, res));
+    // Setup route - PATCH (update) tutorial
+    router.route('/tutorials/:tutorialID/updatetutorial').patch((req, res) => updateTutorial(req, res));
 
-	// Route to create a tutorial via a POST request
-	instructionManagementRouter.route('/projects/:projectID/modules/:moduleID/createtutorial').post((req, res) => createTutorial(req, res));
+    // Setup route - DELETE tutorial
+    router.route('/tutorials/:tutorialID/deletetutorial').delete((req, res) => deleteTutorial(req, res));
 
-	// Return router after attaching routes to it
-	return instructionManagementRouter;
+    return router;
 }
 
-module.exports = router;
+module.exports = instructionManagementRouter;
+
