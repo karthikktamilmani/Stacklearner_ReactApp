@@ -1,86 +1,104 @@
 // Author: Daksh Patel
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import auth from '../../authentication/Auth';
 import axios from '../../authentication/axios-user-management';
+import {bounceInUp, fadeIn, fadeInUp} from 'react-animations';
+import Radium, {StyleRoot} from 'radium';
+
+const styles = {
+	fadeIn: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeIn, 'fadeIn')
+	},
+	bounceInUp: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(bounceInUp, 'bounceInUp')
+	},
+	fadeInUp: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeInUp, 'fadeInUp')
+	}
+}
 
 class UpdateProfile extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            firstName: auth.user.firstName,
-            lastName: auth.user.lastName,
-            email: auth.user.email,
-            password: '',
-            updated: 'NoYet'
-        }
-        this.passwordField = React.createRef();
-        this.toggleButton = React.createRef();
-    }
+	constructor(props) {
+		super(props);
+		this.state = {
+			firstName: auth.user.firstName,
+			lastName: auth.user.lastName,
+			email: auth.user.email,
+			password: '',
+			updated: 'NoYet'
+		}
+		this.passwordField = React.createRef();
+		this.toggleButton = React.createRef();
+	}
 
-    toggleVisibility = () => {
-        const passwordInputField = this.passwordField.current;
-        const visibilityToggleButtonText = this.toggleButton.current;
+	toggleVisibility = () => {
+		const passwordInputField = this.passwordField.current;
+		const visibilityToggleButtonText = this.toggleButton.current;
 
-        if (passwordInputField.type === "password") {
-            passwordInputField.type = "text";
-            visibilityToggleButtonText.innerText = "Hide";
-        }
-        else {
-            passwordInputField.type = "password";
-            visibilityToggleButtonText.innerText = "Show";
-        }
-    }
+		if (passwordInputField.type === "password") {
+			passwordInputField.type = "text";
+			visibilityToggleButtonText.innerText = "Hide";
+		} else {
+			passwordInputField.type = "password";
+			visibilityToggleButtonText.innerText = "Show";
+		}
+	}
 
-    closeBanner = (event) => {
-        const bannerIcon = event.target;
-        const banner = bannerIcon.parentNode;
-        banner.classList.remove('visible');
-        banner.classList.add('hidden');
-        this.setState({
-            updated: 'NotYet'
-          });
-    }
+	closeBanner = (event) => {
+		const bannerIcon = event.target;
+		const banner = bannerIcon.parentNode;
+		banner.classList.remove('visible');
+		banner.classList.add('hidden');
+		this.setState({
+			updated: 'NotYet'
+		});
+	}
 
-    handleChange = (event) => {
-        const value = event.target.value;
-        const name = event.target.name;
-        this.setState({
-            [name]: value
-        })
-    }
+	handleChange = (event) => {
+		const value = event.target.value;
+		const name = event.target.name;
+		this.setState({
+			[name]: value
+		})
+	}
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        const user = this.state;
-        console.log(user);
-        axios.patch('/usermanagement/updateprofile', user).then((res) => {
-            console.log(res);
-            if(res.status===200) {
-                console.log(localStorage.getItem("authToken"));
-                auth.authenticated=true;
-                auth.user=res.data.result.user;
-                this.setState({
-                    updated: 'Yes'
-                  });
-            } else {
-                this.setState({
-                   updated: 'No'
-                });
-            }
-        })
-        .catch((err)=>{
-            this.setState({
-                updated: 'No'
-            })
-        });
-    }
+	handleSubmit = (event) => {
+		event.preventDefault();
+		const user = this.state;
 
-    render() {
-        const { firstName, lastName, email, password, updated } = this.state;
+		console.log(user);
+		axios.patch('/usermanagement/updateprofile', user).then((res) => {
+			console.log(res);
+			if (res.status === 200) {
+				console.log(localStorage.getItem("authToken"));
+				auth.authenticated = true;
+				auth.user = res.data.result.user;
+				this.setState({
+					updated: 'Yes'
+				});
+			} else {
+				this.setState({
+					updated: 'No'
+				});
+			}
+		})
+			.catch((err) => {
+				this.setState({
+					updated: 'No'
+				})
+			});
+	}
 
-        return (
-            <>
+	render() {
+		const {firstName, lastName, email, password, updated} = this.state;
+
+		return (
+
+			<>
 				<main className="gray-background">
 					<StyleRoot>
 						<div style={styles.fadeInUp}>
@@ -140,8 +158,9 @@ class UpdateProfile extends Component {
 					</StyleRoot>
 				</main>
 			</>
-        );
-    }
+		);
+	}
+
 }
 
 export default UpdateProfile;
