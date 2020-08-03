@@ -27,5 +27,6 @@ axiosInstance.interceptors.request.use((config) => {
 
 	return config;
 })
-console.log(axiosInstance, "");
+
+// console.log(axiosInstance, "");
 export default axiosInstance;
