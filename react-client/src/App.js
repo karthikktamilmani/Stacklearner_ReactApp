@@ -19,22 +19,28 @@ import StudentProfile from './components/StudentProfile/StudentProfile';
 import Curriculum from './components/Curriculum/Curriculum';
 import Subscription from './components/Subscription/';
 import Payment from './components/Payment/';
+import ForgotPassword from "./components/StudentProfile/ForgotPassword";
+import ChangePassword from "./components/StudentProfile/ChangePassword";
 
 function App() {
-  return (
-    <>
-      <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route exact path="/signin" component={SignIn} />
-        <Route exact path="/signup" component={SignUp} />
-        <ProtectedRoute>
-          <Route exact path="/student/dashboard" component={StudentDashboard} />
-          <Route exact path="/student/profile" component={StudentProfile} />
-          <Route exact path="/student/projects/:projectID" component={Curriculum} />
-          <Route path="/subscription" exact component={Subscription} />
-          <Route path="/payment-settings" exact component={Payment} />
-        </ProtectedRoute>
-      </Switch>
+	return (
+		<>
+			<Switch>
+				{/*<CheckLogin>*/}
+				<Route exact path="/" component={LandingPage}/>
+				<Route exact path="/signin" component={SignIn}/>
+				<Route exact path="/signup" component={SignUp}/>
+				{/*</CheckLogin>*/}
+				<Route exact path="/forgotpassword" component={ForgotPassword}/>
+				<Route exact path="/changepassword" component={ChangePassword}/>
+				<ProtectedRoute>
+					<Route exact path="/student/dashboard" component={StudentDashboard}/>
+					<Route exact path="/student/profile" component={StudentProfile}/>
+					<Route exact path="/student/projects/:projectID" component={Curriculum}/>
+					<Route path="/subscription" exact component={Subscription}/>
+					<Route path="/payment-settings" exact component={Payment}/>
+				</ProtectedRoute>
+			</Switch>
     </>
   );
 }

@@ -6,7 +6,7 @@ const Loading = (props) => {
     const { message } = props;
     return (
         <div>
-            <p className="loading-message"><i className="fas fa-spinner"></i> {message}</p>
+            <p className="loading-message"><i className="fas fa-spinner fa-spin"/> {message}</p>
         </div>
     );
 }

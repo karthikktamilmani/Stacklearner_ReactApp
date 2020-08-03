@@ -13,8 +13,8 @@ class Auth {
 		this.user = null;
 	}
 
-    // The method takes the payload and success callback as an arguement.
-	login(values, callback) {
+	// The method takes the payload and success callback as an arguement.
+	login(values, successCallback, failureCallback) {
 		const credentials = {
 			email: values.email,
 			password: values.password
@@ -24,20 +24,48 @@ class Auth {
 			.then((response) => {
 				// console.log(response);
 				this.authenticated = true;
-				this.user=response.data.result.user;
-				callback(response);
+				console.log(this.authenticated);
+				this.user = response.data.result.user;
+				successCallback(response);
 			})
 			.catch(
 				(error) => {
 					this.authenticated = false;
+					failureCallback(error);
 					// console.log(error.response.data.message);
 					// console.log("error message: ", error.message);
-					alert('Incorrect username or password.');
+					// alert('Incorrect username or password.');
 				}
 			)
 	}
 
-    // The method logout takes the success callback as an argument
+	forgotPassword(email, successCallback, failureCallback) {
+		const body = {
+			email: email,
+			currURL: window.location.origin
+		}
+
+		axios.post("/usermanagement/forgotpassword", body)
+			.then((response) => {
+				successCallback(response);
+			})
+			.catch((error) => {
+				failureCallback(error);
+			})
+	}
+
+	changePassword(body, successCallback, failureCallback) {
+
+		axios.post("/usermanagement/changepassword", body)
+			.then((response) => {
+				successCallback(response);
+			})
+			.catch((error) => {
+				failureCallback(error);
+			})
+	}
+
+	// The method logout takes the success callback as an argument
 
 	async logout(callback) {
 		let response;
