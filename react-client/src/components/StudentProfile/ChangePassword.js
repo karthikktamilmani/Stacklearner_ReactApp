@@ -34,46 +34,49 @@ const NavBar = () => {
 
 // This class returns the component of signin form.
 
-class SignIn extends Component {
+class ChangePassword extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			email: '',
 			password: '',
 			error: false,
+			success: false,
 			message: ""
 		}
-		this.passwordField = React.createRef();
+		// this.passwordField = React.createRef();
 		this.toggleButton = React.createRef();
 	}
 
-	toggleVisibility = () => {
-		const passwordInputField = this.passwordField.current;
-		const visibilityToggleButtonText = this.toggleButton.current;
-
-		if (passwordInputField.type === "password") {
-			passwordInputField.type = "text";
-			visibilityToggleButtonText.innerText = "Hide";
-		} else {
-			passwordInputField.type = "password";
-			visibilityToggleButtonText.innerText = "Show";
-		}
-	}
-
-	successCallback = (values) => {
-		localStorage.setItem('authToken', values.data.result.authToken);
-		this.props.history.push('/student/dashboard');
+	successCallback = (response) => {
+		console.log(response);
+		this.setState({
+			success: true,
+			message: response.data.message,
+			error: false
+		});
+		setInterval(() => this.props.history.push('/signin'), 1000);
 	}
 
 	failureCallback = (error) => {
-		console.log(error.response);
-		this.setState({error: true, message: error.response.data.message})
+		console.log(error);
+		console.log(error.response.data.message);
+		this.setState({
+			error: true,
+			message: error.response.data.message,
+			success: false
+		});
 	}
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		const user = this.state;
-		auth.login(user, this.successCallback, this.failureCallback);
+		const {password} = this.state;
+		console.log(window.location.search.split("=", 2)[1]);
+		const token = window.location.search.split("=")[1];
+		const body = {
+			newPassword: password,
+			token: token
+		}
+		auth.changePassword(body, this.successCallback, this.failureCallback);
 	}
 
 	handleChange = (event) => {
@@ -83,6 +86,7 @@ class SignIn extends Component {
 			[name]: value
 		});
 	}
+
 	closeBanner = (event) => {
 		const bannerIcon = event.target;
 		const banner = bannerIcon.parentNode;
@@ -102,42 +106,31 @@ class SignIn extends Component {
 				<main className="gray-background">
 					<section className="container">
 						<div className="grid">
-							<div className="col-md-8 col-sm-12 offset-md-2 authentication-form-container">
-								<h1>Sign In</h1>
+							<div className="col-md-8 col-sm-12 offset-md-2 forgotpassword-form-container">
+								<h1>Create new password</h1>
 								<form onSubmit={this.handleSubmit}>
 									<fieldset>
 										<div className="form-controls-group-outer last-form-controls-group-outer">
-											<div className="form-controls-group-inner">
-												<label htmlFor="user-email">Email</label>
-												<input type="email" name="email" id="user-email" value={email} onChange={this.handleChange}
-															 autoComplete="on" required/>
-											</div>
-											<div className="form-controls-group-inner">
-												<label htmlFor="user-password">Password</label>
+											<div className="form-controls-group-inner" id="forgot-password-control">
+												<label htmlFor="user-password">New Password</label>
 												<input type="password" name="password" id="user-password" value={password}
-															 ref={this.passwordField} onChange={this.handleChange} autoComplete="off" required/>
-												<button type="button" id="password-visibility-toggle" aria-label="Show password"
-																onClick={this.toggleVisibility}><span id="password-visibility-toggle-text"
-																																			ref={this.toggleButton}>Show</span></button>
+															 onChange={this.handleChange}
+															 autoComplete="on" required disabled={this.state.success}/>
 											</div>
 										</div>
 									</fieldset>
 									<div className="form-button-container">
-										<button type="submit" className="button button-medium button-accent-outline">Sign In</button>
+										<button type="submit" className="button button-medium button-accent-outline"
+														disabled={this.state.success}>Submit
+										</button>
 										<div className="banner-container">
-											{/*<p*/}
-											{/*	className={this.state.success ? "visible flash-banner green-background" : "hidden"}>{this.state.message}<i*/}
-											{/*	className="fas fa-times" onClick={this.closeBanner}/></p>*/}
+											<p
+												className={this.state.success ? "visible flash-banner green-background" : "hidden"}>{this.state.message}<i
+												className="fas fa-times" onClick={this.closeBanner}/></p>
 											<p
 												className={this.state.error ? "visible flash-banner pink-background" : "hidden"}>{this.state.message}<i
 												className="fas fa-times" onClick={this.closeBanner}/></p>
 										</div>
-										<Link to="/signup" className="text-link text-link-small text-link-blue"
-													aria-label="Sign up with stacklearner">No account? Sign Up</Link>
-									</div>
-									<div className="form-button-container form-button-container-last">
-										<Link to="/forgotpassword" className="text-link text-link-small text-link-red"
-													aria-label="Click here to reset your password.">Forgot password?</Link>
 									</div>
 								</form>
 							</div>
@@ -150,4 +143,4 @@ class SignIn extends Component {
 	}
 }
 
-export default SignIn;
+export default ChangePassword;
