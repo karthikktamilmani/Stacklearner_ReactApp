@@ -44,9 +44,8 @@ const getOneProject = async (req, res) => {
 
 // Controller - Create a new project in DB
 const createProject = async (req, res) => {
-    const url = `${req.protocol}://${req.get('host')}`;
     let project = req.body;
-    project.projectImageURL = url + '/public/' + req.file.filename;
+    console.log(project);
     const projectModel = new Project(project);
 
     try {
@@ -61,13 +60,12 @@ const createProject = async (req, res) => {
 const updateProject = async (req, res) => {
     const { projectID } = req.params;
     const updatedFields = req.body;
-    const url = `${req.protocol}://${req.get('host')}`;
-    updatedFields.projectImageURL = url + '/public/' + req.file.filename;
+	console.log(updatedFields);
     const query = Project.findByIdAndUpdate(projectID, updatedFields, { new: true, useFindAndModify: false });
 
     try {
         const result = await query.exec();
-        res.status(200).json();
+			res.status(200).json(result);
     } catch (err) {
         res.status(400).send(err);
     }

@@ -38,7 +38,7 @@ class ProtectedRoute extends Component {
 		if (loading) {
 			return <div>Loading</div>
 		}
-
+		console.log(children)
 		return <Fragment>
 			{isAuthenticated
 				? children
@@ -47,6 +47,5 @@ class ProtectedRoute extends Component {
 		</Fragment>
 	}
 }
-
 
 export default withRouter(ProtectedRoute)

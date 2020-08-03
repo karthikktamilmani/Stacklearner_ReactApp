@@ -75,7 +75,7 @@ function userController() {
 		let resp;
 		//console.log(req.body);
 		let user = new User(req.body);
-		Role.findOne({role: "student"})
+		Role.findOne({role: "instructor"})
 			.exec(async (err, role) => {
 				if (err) {
 					resp = createResponse(err, {});

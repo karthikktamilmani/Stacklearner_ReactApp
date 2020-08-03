@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from '../Common/Footer';
@@ -11,14 +11,15 @@ class InstructorDashboard extends Component {
     }
 
     render() {
-        return (
-            <>
-                <Header />
-                <Main />
-                <Footer />
-            </>
-        );
-    }
+			console.log(auth);
+			return (
+				<>
+					<Header clearLocalStorage={this.clearLocalStorage} firstName={auth.user.firstName}/>
+					<Main/>
+					<Footer/>
+				</>
+			);
+		}
 }
 
 export default InstructorDashboard;
