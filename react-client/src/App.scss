@@ -1,3 +1,5 @@
+@import './variables';
+
 /* Universal, <html>, and <body> Styles */
 
 *,
@@ -1273,4 +1275,43 @@ blockquote footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+/* Discussion styles */
+
+.discussions-wrapper {
+    .media-left {
+        i {
+            font-size: 20px;
+        }
+    }
+    textarea.form-control {
+        height: auto;
+        color: #576366;
+        background-color: #f8f8fb;
+        border: 2px solid #EFEEFD;
+    }
+    p {
+        font-size: 15px;
+        line-height: 1.45rem;
+    }
+    .discussion-period {
+        font-size: 12px;
+        color: #b0b0bf;
+    }
+    .options {
+        .like-icon,
+        .btn,
+        .like {
+            font-size: 0.85rem;
+        }
+        .like-icon {
+            cursor: pointer;
+            color: $primary-color;
+        }
+        .separator {
+            font-size: 0.65rem;
+            margin-left: 0.75rem;
+        }
+    }
 }

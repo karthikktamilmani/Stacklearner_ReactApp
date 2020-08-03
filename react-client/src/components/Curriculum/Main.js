@@ -6,6 +6,7 @@ import axios from "../../authentication/axios-user-management";
 import auth from '../../authentication/Auth';
 import TutorialPlayer from './TutorialPlayer';
 import Loading from '../Common/Loading';
+import Discussions from './Discussions';
 
 const Tutorial = (props) => {
     const { tutorial, handleClick, currentTutorialID, finishedTutorials } = props;
@@ -33,7 +34,7 @@ const Module = (props) => {
                 moduleTutorials.map((tutorial, index) => {
                     return <Tutorial key={index} tutorial={tutorial} handleClick={handleClick} currentTutorialID={currentTutorialID} finishedTutorials={finishedTutorials}/>
                 })
-            }   
+            }
             </ul>
         </>
     )
@@ -46,11 +47,11 @@ class Main extends Component {
             statusCode: '',
             tutorials: [],
             finishedTutorials: []
-        } 
+        }
     }
 
     componentDidMount() {
-        /* Since the progress tracking feature isnit up yet, we can simple get the first tutorial of the 
+        /* Since the progress tracking feature isnit up yet, we can simple get the first tutorial of the
         project: it's number, ID, and the total number of tutorials of this project.
         */
         const { projectID } = this.props;
@@ -150,7 +151,7 @@ class Main extends Component {
             });
         }
     }
-    
+
     decrementCurrentTutorialID = () => {
         const { tutorials, currentTutorialID } = this.state;
         const currentTutorial = tutorials.find((tutorial) => tutorial._id === currentTutorialID);
@@ -176,7 +177,7 @@ class Main extends Component {
                 if (response.status === 200) {
                     this.setState({
                         finishedTutorials: finishedTutorials
-                    });    
+                    });
                 }
                 else {
                     console.log('We had error saving your progress.')
@@ -213,7 +214,7 @@ class Main extends Component {
     navigateToLastTutorial = () => {
         this.decrementCurrentTutorialID();
     }
-    
+
     groupTutorialsByModules = (tutorials) => {
         return tutorials.reduce((acc, tutorial) => {
             const moduleTitleKey = tutorial.tutorialModuleID.moduleTitle;
@@ -252,8 +253,13 @@ class Main extends Component {
                                 </nav>
                             </div>
                         </div>
+                        <div className="grid">
+                          <div className="col-md-9 col-sm-12 discussions-wrapper">
+                            <Discussions projectID={this.props.projectID}/>
+                          </div>
+                        </div>
                     </div>
-                </section>    
+                </section>
             );
         } else {
             return (
@@ -263,7 +269,7 @@ class Main extends Component {
                             <Loading message={"Loading your learning path..."}/>
                         </div>
                     </div>
-                </div> 
+                </div>
             )
 
         }
