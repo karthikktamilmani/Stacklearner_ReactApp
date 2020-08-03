@@ -1,7 +1,7 @@
 // Auhtor: Mansoor Ghazi
 // Author: Ravi Patel
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from '../Common/Footer';
@@ -15,9 +15,9 @@ class Curriculum extends Component {
     render() {
         return (
             <>
-                <Header clearLocalStorage={this.clearLocalStorage} />
-                <Main projectID={this.props.match.params.projectID} />
-                <Footer />
+							<Header clearLocalStorage={this.clearLocalStorage}/>
+							<Main projectID={this.props.match.params.projectID} history={this.props.history}/>
+							<Footer/>
             </>
         );
     }
