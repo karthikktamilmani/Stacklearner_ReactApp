@@ -12,6 +12,7 @@ const {Project} = require('../../models/learningpath.models');
 const getAllProjects = (req, res) => {
 	// Create query to find all projects and populate the result with project's modules
 	const query = Project.find({}, {_v: 0, projectNumber: 0}).sort({projectNumber: 1});
+	console.log()
 	console.log('Fetching projects');
 	// Execute query and return array of projects
 	query.exec((err, projects) => {
