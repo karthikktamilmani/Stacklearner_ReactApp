@@ -143,7 +143,7 @@ class SignUp extends Component {
                                         </div>
                                     </fieldset>
                                     <div className="form-button-container">
-                                        <button type="submit" className="button button-medium button-accent-outline">Sign Up</button>
+                                        <button type="submit" className="button button-small button-accent-outline">Sign Up</button>
                                         <Link to="/signin" className="text-link text-link-small text-link-blue" aria-label="Sign up with stacklearner">Have an account? Sign In</Link>
                                     </div>
                                 </form>

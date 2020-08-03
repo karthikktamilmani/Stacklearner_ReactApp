@@ -1,6 +1,6 @@
 const multer = require('multer');
 
-const directory = './express-server/public';
+const directory = '../express-server/public';
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {

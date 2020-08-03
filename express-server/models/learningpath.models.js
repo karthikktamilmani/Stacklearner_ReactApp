@@ -20,7 +20,7 @@ const ProjectSchema = new Schema({
 		type: String,
 		required: true
 	},
-	projectImage: {
+	projectImageURL: {
 		type: String,
 		required: true
 	},

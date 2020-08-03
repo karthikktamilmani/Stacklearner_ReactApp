@@ -13,7 +13,7 @@ class InstructorDashboard extends Component {
     render() {
         return (
             <>
-                <Header clearLocalStorage={this.clearLocalStorage} firstName={auth.user.firstName}/>
+                <Header />
                 <Main />
                 <Footer />
             </>

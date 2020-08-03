@@ -20,6 +20,8 @@ import Curriculum from './components/Curriculum/Curriculum';
 import Subscription from './components/Subscription/';
 import Payment from './components/Payment/';
 import InstructorDashboard from './components/InstructorDashboard/InstructorDashboard';
+import CreateProject from './components/InstructorDashboard/CreateProject';
+
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/instructor/dashboard" component={InstructorDashboard} />
+        <Route exact path="/instructor/createproject" component={CreateProject} />
         <ProtectedRoute>
           <Route exact path="/student/dashboard" component={StudentDashboard} />
           <Route exact path="/student/profile" component={StudentProfile} />
@@ -35,7 +39,6 @@ function App() {
           <Route path="/subscription" exact component={Subscription} />
           <Route path="/payment-settings" exact component={Payment} />
         </ProtectedRoute>
-        <Route exact path="/instructor/dashboard" component={InstructorDashboard} />
       </Switch>
     </>
   );

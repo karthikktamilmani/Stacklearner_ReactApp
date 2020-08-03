@@ -114,7 +114,7 @@ class UpdateProfile extends Component {
                                         </div>
                                     </fieldset>
                                     <div className="form-button-container">
-                                        <button type="submit" className="button button-medium button-accent-outline">Update Profile</button>
+                                        <button type="submit" className="button button-small button-accent-outline">Update Profile</button>
                                         <div className="banner-container">
                                             <p className={updated === 'Yes' ? "visible flash-banner green-background" : "hidden"}>Profile updated successfully.<i className="fas fa-times" onClick={this.closeBanner}></i></p>
                                             <p className={updated === 'No' ? "visible flash-banner pink-background" : "hidden"}>Profile could not be updated.<i class="fas fa-times" onClick={this.closeBanner}></i></p>
