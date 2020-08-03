@@ -7,7 +7,7 @@ import auth from './Auth';
 // The protected route is a wrapper that is used to protect the routes which
 // requires the user authentication. It renders its child if and only if the
 // user is authenticated by calling auth.isAuthenticated()
-class ProtectedRoute extends Component {
+class InstructorProtectedRoute extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -18,16 +18,16 @@ class ProtectedRoute extends Component {
 
 	componentDidMount() {
 		// this.verifyToken()
-		auth.isAuthenticated(this.successCallback,this.failureCallback)
+		auth.isAuthenticated(this.successCallback, this.failureCallback)
 	}
 
-	successCallback=()=>{
+	successCallback = () => {
 		this.setState({
 			loading: false,
 			isAuthenticated: true
 		})
 	}
-	failureCallback=()=>{
+	failureCallback = () => {
 		this.setState({loading: false})
 	}
 
@@ -38,9 +38,9 @@ class ProtectedRoute extends Component {
 		if (loading) {
 			return <div>Loading</div>
 		}
-		console.log(children)
+
 		return <Fragment>
-			{isAuthenticated
+			{isAuthenticated && auth.user.roles.length > 1
 				? children
 				: <Redirect to={{pathname: "/signin", state: {from: location}}}/>
 			}
@@ -48,4 +48,4 @@ class ProtectedRoute extends Component {
 	}
 }
 
-export default withRouter(ProtectedRoute)
+export default withRouter(InstructorProtectedRoute)

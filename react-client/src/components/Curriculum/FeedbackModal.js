@@ -43,7 +43,7 @@ class FeedbackModal extends Component {
 			<div>
 				<Modal show={this.props.show} onHide={this.props.closeModal}>
 					<Modal.Header closeButton>
-						<Modal.Title>Modal heading</Modal.Title>
+						<Modal.Title>Would you like to provide a feedback?</Modal.Title>
 					</Modal.Header>
 					<Modal.Body>
 						<Form>
@@ -62,7 +62,7 @@ class FeedbackModal extends Component {
 									<Form.Label className="p-0 pb-2">Comments:</Form.Label>
 								</Col>
 								<Col md={8}>
-									<Form.Control name="comments" onChange={this.handleChange} as="textarea" rows="3" required/>
+									<Form.Control name="comments" onChange={this.handleChange} as="textarea" rows="3"/>
 								</Col>
 							</Form.Row>
 							<p
@@ -78,20 +78,12 @@ class FeedbackModal extends Component {
 							Close
 						</Button>
 						<Button variant="primary" onClick={() => {
-							if (this.state.comments.trim().length > 0) {
-								this.setState({
-									error: false,
-									success: true,
-									message: "Thank you for your feedback :)"
-								});
-								this.props.onSubmitHandler(this.state.ratings, this.state.comments)
-							} else {
-								this.setState({
-									error: true,
-									success: false,
-									message: "Please enter comments"
-								});
-							}
+							this.setState({
+								error: false,
+								success: true,
+								message: "Thank you for your feedback :)"
+							});
+							this.props.onSubmitHandler(this.state.ratings, this.state.comments)
 						}}>
 							Submit
 						</Button>

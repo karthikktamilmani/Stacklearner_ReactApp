@@ -61,8 +61,14 @@ class SignIn extends Component {
 	}
 
 	successCallback = (values) => {
-		localStorage.setItem('authToken', values.data.result.authToken);
-		this.props.history.push('/student/dashboard');
+		const {authToken, user} = values.data.result;
+		localStorage.setItem('authToken', authToken);
+		console.log(user.roles, authToken);
+		if (user.roles.length > 1) {
+			this.props.history.push('/instructor/dashboard');
+		} else {
+			this.props.history.push('/student/dashboard');
+		}
 	}
 
 	failureCallback = (error) => {

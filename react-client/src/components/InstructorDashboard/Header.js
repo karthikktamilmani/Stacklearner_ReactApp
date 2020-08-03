@@ -1,20 +1,30 @@
 // Auhtor: Mansoor Ghazi
 // Author: Ravi Patel
 
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import auth from '../../authentication/Auth';
+import {fadeIn} from 'react-animations';
+import Radium from 'radium';
+
+
+const styles = {
+	fadeIn: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeIn, 'fadeIn')
+	}
+}
 
 const Header = (props) => {
-    useEffect(() => {
-        const mainNav = document.querySelector(".main-nav");
-        const navbarToggle = document.querySelector(".navbar-toggler");
-        navbarToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-        });
-    });
+	useEffect(() => {
+		const mainNav = document.querySelector(".main-nav");
+		const navbarToggle = document.querySelector(".navbar-toggler");
+		navbarToggle.addEventListener('click', () => {
+			mainNav.classList.toggle('active');
+		});
+	});
 
-    //const { clearLocalStorage, firstName } = props;
+	const {clearLocalStorage, firstName} = props;
 
     return (
       <header>
@@ -25,17 +35,20 @@ const Header = (props) => {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul className="main-nav navbar-nav ml-auto">
-              <li className="nav-item"><Link to="/" className="nav-links mr-3">Sign Out</Link></li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i className="far fa-user"></i> Instructor
-                  </a>
-                  <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                    <Link to="/student/profile" className="dropdown-item">Your Profile</Link>
-                  </div>
-                </li>
-              </ul>
+						<ul className="main-nav navbar-nav ml-auto">
+							<li><Link to="/student/dashboard" className="nav-links mr-3">View as student</Link></li>
+							<li className="nav-item"><Link to="/" className="nav-links mr-3"
+																						 onClick={() => auth.logout(clearLocalStorage)}>Sign Out</Link></li>
+							<li className="nav-item dropdown">
+								<a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+									 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i className="far fa-user"></i> {firstName}
+								</a>
+								<div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+									<Link to="/student/profile" className="dropdown-item">Your Profile</Link>
+								</div>
+							</li>
+						</ul>
             </div>
           </nav>
         </header>
