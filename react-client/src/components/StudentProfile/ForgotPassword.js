@@ -34,18 +34,22 @@ const NavBar = () => {
 
 // This class returns the component of signin form.
 
-class ChangePassword extends Component {
+class ForgotPassword extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			password: '',
-			confirmPassword: '',
+			email: '',
 			error: false,
 			success: false,
 			message: ""
 		}
 		// this.passwordField = React.createRef();
 		this.toggleButton = React.createRef();
+	}
+
+	setLocalStorage = (values) => {
+		localStorage.setItem('authToken', values.data.result.authToken);
+		this.props.history.push('/student/dashboard');
 	}
 
 	successCallback = (response) => {
@@ -55,7 +59,6 @@ class ChangePassword extends Component {
 			message: response.data.message,
 			error: false
 		});
-		setTimeout(() => this.props.history.push('/signin'), 1000);
 	}
 
 	failureCallback = (error) => {
@@ -70,26 +73,15 @@ class ChangePassword extends Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		const {password, confirmPassword} = this.state;
-		if (password !== confirmPassword) {
-			this.setState({message: "Password and Confirm password did not match", error: true});
-		} else {
-			console.log(window.location.search.split("=", 2)[1]);
-			const token = window.location.search.split("=")[1];
-			const body = {
-				newPassword: password,
-				token: token
-			}
-			auth.changePassword(body, this.successCallback, this.failureCallback);
-		}
+		const {email} = this.state;
+		auth.forgotPassword(email, this.successCallback, this.failureCallback);
 	}
 
 	handleChange = (event) => {
 		const value = event.target.value;
 		const name = event.target.name;
 		this.setState({
-			[name]: value,
-			error: false
+			[name]: value
 		});
 	}
 
@@ -104,7 +96,7 @@ class ChangePassword extends Component {
 	}
 
 	render() {
-		const {email, password, confirmPassword} = this.state;
+		const {email, password} = this.state;
 
 		return (
 			<>
@@ -113,18 +105,13 @@ class ChangePassword extends Component {
 					<section className="container">
 						<div className="grid">
 							<div className="col-md-8 col-sm-12 offset-md-2 forgotpassword-form-container">
-								<h1>Create new password</h1>
+								<h1>Forgot Password</h1>
 								<form onSubmit={this.handleSubmit}>
 									<fieldset>
 										<div className="form-controls-group-outer last-form-controls-group-outer">
 											<div className="form-controls-group-inner" id="forgot-password-control">
-												<label htmlFor="user-password">New Password</label>
-												<input type="password" name="password" id="user-password" value={password}
-															 onChange={this.handleChange}
-															 autoComplete="on" required disabled={this.state.success}/>
-												<label htmlFor="confirm-password">Confirm Password</label>
-												<input type="password" name="confirmPassword" id="confirm-password" value={confirmPassword}
-															 onChange={this.handleChange}
+												<label htmlFor="user-email">Email</label>
+												<input type="email" name="email" id="user-email" value={email} onChange={this.handleChange}
 															 autoComplete="on" required disabled={this.state.success}/>
 											</div>
 										</div>
@@ -153,4 +140,4 @@ class ChangePassword extends Component {
 	}
 }
 
-export default ChangePassword;
+export default ForgotPassword;
