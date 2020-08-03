@@ -17,7 +17,7 @@ const Project = ({_id, projectTitle, projectNumber, projectDemoLink, projectLeng
 						<img src={projectImageURL} alt="Todo list app project"/>
 					</div>
 					<div className="project-card-outer-body">
-						{console.log(progress)}
+						{/*{console.log(progress)}*/}
 						<div className="progress-bar" style={{width: `${progress}%`}} role="progressbar" aria-valuenow={{progress}}
 								 aria-valuemin="0" aria-valuemax="100"/>
 						<div className="project-card-inner-body">

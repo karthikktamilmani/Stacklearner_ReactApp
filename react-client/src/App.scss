@@ -302,11 +302,11 @@ button:focus {
 }
 
 button:disabled {
-  border-color: darkgray;
-  color: darkgray;
-  background-color: transparent;
-  cursor: not-allowed;
-  pointer-events: none;
+  border-color: darkgray !important;
+  color: darkgray !important;
+  background-color: transparent !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
 }
 
 .text-button {
@@ -923,6 +923,10 @@ legend {
   margin-bottom: 1rem;
 }
 
+#forgot-password-control {
+  width: 100%;
+}
+
 .last-form-controls-group-inner,
 .last-form-controls-group-outer {
   margin-bottom: 0rem;
@@ -1248,7 +1252,7 @@ blockquote footer {
 
 /* Authenticaion Form Styles */
 
-.authentication-form-container {
+.authentication-form-container, .forgotpassword-form-container {
   padding: 2rem 1rem;
   border-radius: 8px;
   border: 1px solid #EFEEFD;
@@ -1257,20 +1261,27 @@ blockquote footer {
   background-color: #fff;
 }
 
-.authentication-form-container > h1 {
+.authentication-form-container > h1, .forgotpassword-form-container > h1 {
   font-size: 1.44rem;
   text-align: center;
   margin-bottom: 0.75rem;
 }
 
-.authentication-form-container > form {
-  padding-bottom: 1.5rem;
+.authentication-form-container > form, .forgotpassword-form-container > form {
+  padding-bottom: 0.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
 }
 
-.authentication-form-container .form-button-container {
+.authentication-form-container .form-button-container, .forgotpassword-form-container .form-button-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
+.form-button-container-last {
+  display: flex;
+  margin-top: 2rem;
+  justify-content: end;
+}
+
