@@ -3,7 +3,7 @@
 // Banner ID: B00840003
 
 import React, {Component} from 'react';
-import axios from 'axios';
+import axios from '../../authentication/axios-user-management';
 import ProjectCard from './ProjectCard';
 import Loading from '../Common/Loading';
 import Testimonials from './Testimonials';
@@ -26,6 +26,7 @@ class Main extends Component {
 					});
 				}
 			}).catch((err) => {
+				console.log(err.response)
 				this.setState({
 					error: true
 				})
