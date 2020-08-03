@@ -42,12 +42,12 @@ class Modules extends Component {
         const { modules, loading, error } = this.state;
         if (modules.length > 0) {
             return modules.map((module, index) => {
-                return <ModuleCard key={module._id} moduleNumber={index+1} {...module} />
+                return <ModuleCard key={module._id} moduleNumber={index+1} {...module} deleteModuleHandler={this.removeModule} />
             });
         } else if (loading && modules.length === 0 && !error) {
             return <Loading message={"Loading modules..."} />
         } else if (!loading && modules.length === 0 && !error ) {
-            return <p className="text-center">No modules and tutorials created yet.</p>
+            return <p className="flash-banner pink-background">No modules created yet.</p>
         } else if (error) {
             return <p className="alert alert-danger" role="alert">We encountered an error while loading your modules.</p>
         }
@@ -87,8 +87,39 @@ class Modules extends Component {
         });
     }
 
+    deleteModuleFromDB = async (moduleID) => {
+        return await axios.delete(`instructionmanagement/modules/${moduleID}/deletemodule`);
+    }
+
+    removeModule = (moduleID, moduleTitle) => {
+
+        let textEntered = prompt(`Enter the module's name: ${moduleTitle} to delete the module and its tutorials. Otherwise click Cancel.`);
+
+        if (textEntered === moduleTitle) {
+            this.deleteModuleFromDB(moduleID).then((result) => {
+
+                if (result.status === 200) {
+                    const filteredModules = this.state.modules.filter(module => module._id !== moduleID);
+                    this.setState({
+                        modules: filteredModules,
+                        moduleNumber: filteredModules.length + 1
+                    });
+                } else {
+                    this.setState({
+                        error: true
+                    });
+                }
+
+            }).catch(() => {
+                this.setState({
+                    error: true
+                });
+            });
+        }
+    }
+
     render() {
-        const { moduleNumber, moduleTitle, modules, loading } = this.state;
+        const { moduleNumber, moduleTitle } = this.state;
 
         return (
             <section className="learning-path-section add-edit-curriculum-section gray-background">
