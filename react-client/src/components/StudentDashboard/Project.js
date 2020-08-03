@@ -4,26 +4,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Spinner from "react-bootstrap/Spinner";
-import {fadeInUp} from 'react-animations';
-import Radium, {StyleRoot} from 'radium';
-
-const styles = {
-	fadeInUp: {
-		animation: 'x 1s',
-		animationName: Radium.keyframes(fadeInUp, 'fadeInUp')
-	}
-}
 
 const Project = ({_id, projectTitle, projectNumber, projectDemoLink, projectLengthHours, projectLengthMinutes, projectAccessLevel, isPro, progress, projectImageURL, imageBackgroundColor}) => {
 
 	if (isPro !== null) {
 		return (
-			// <StyleRoot>
 			<div className="col-md-4 col-sm-12">
-				<StyleRoot>
-					<div style={styles.fadeInUp}>
-						<div className="project-card-container">
-							<div className={`project-card-image ${imageBackgroundColor}`}>
+				<div className="project-card-container">
+					<div className={`project-card-image ${imageBackgroundColor}`}>
 					<span
 						className={projectAccessLevel.toLowerCase() === 'free' ? "project-access-level-label free-label-styles" : "project-access-level-label  pro-label-styles"}>{projectAccessLevel}</span>
 						<img src={projectImageURL} alt="Todo list app project"/>
@@ -43,11 +31,8 @@ const Project = ({_id, projectTitle, projectNumber, projectDemoLink, projectLeng
 							</div>
 						</div>
 					</div>
-				</StyleRoot>
-
+				</div>
 			</div>
-			// </StyleRoot>
-
 		)
 	} else return <Spinner/>;
 

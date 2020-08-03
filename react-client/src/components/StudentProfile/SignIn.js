@@ -1,82 +1,85 @@
 // Author: Daksh Patel
 
-import React, {Component, useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Footer from '../Common/Footer';
 import auth from '../../authentication/Auth';
 
 // This class returns the component of navbar when user is not logged in.
 const NavBar = () => {
-	useEffect(() => {
-		const mainNav = document.querySelector(".main-nav");
-		const navbarToggle = document.querySelector(".navbar-toggle");
-		navbarToggle.addEventListener('click', () => {
-			mainNav.classList.toggle('active');
-		});
-	});
+    useEffect(() => {
+        const mainNav = document.querySelector(".main-nav");
+        const navbarToggle = document.querySelector(".navbar-toggle");
+        navbarToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+    });
 
-	return (
-		<header>
-			<nav className="navbar light-navbar">
+    return (
+        <header>
+            <nav className="navbar light-navbar">
                 <span className="navbar-toggle">
                     <i className="fas fa-bars"></i>
                 </span>
-				<Link to="/" className="logo"><i className="logo-icon fas fa-terminal"></i>stacklearner</Link>
-				<ul className="main-nav">
-					<li><a href="/" className="nav-links" aria-label="Go back to home page">Home</a></li>
-					<li><Link to="/signup" className="nav-links text-link text-link-blue" aria-label="Sign up with stacklearner">Sign
-						Up</Link></li>
-				</ul>
-			</nav>
-		</header>
-	);
+                <Link to="/" className="logo"><i className="logo-icon fas fa-terminal"></i>stacklearner</Link>
+                <ul className="main-nav">
+                    <li><a href="/" className="nav-links" aria-label="Go back to home page">Home</a></li>
+                    <li><Link to="/signup" className="nav-links text-link text-link-blue" aria-label="Sign up with stacklearner">Sign Up</Link></li>
+                </ul>
+            </nav>
+        </header>
+    );
 }
 
 // This class returns the component of signin form.
 
 class SignIn extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			email: '',
-			password: '',
-			error: false,
-			message: ""
-		}
-		this.passwordField = React.createRef();
-		this.toggleButton = React.createRef();
-	}
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: '',
+            password: ''
+        }
+        this.passwordField = React.createRef();
+        this.toggleButton = React.createRef();
+    }
 
-	toggleVisibility = () => {
-		const passwordInputField = this.passwordField.current;
-		const visibilityToggleButtonText = this.toggleButton.current;
+    toggleVisibility = () => {
+        const passwordInputField = this.passwordField.current;
+        const visibilityToggleButtonText = this.toggleButton.current;
 
-		if (passwordInputField.type === "password") {
-			passwordInputField.type = "text";
-			visibilityToggleButtonText.innerText = "Hide";
-		} else {
-			passwordInputField.type = "password";
-			visibilityToggleButtonText.innerText = "Show";
-		}
-	}
+        if (passwordInputField.type === "password") {
+            passwordInputField.type = "text";
+            visibilityToggleButtonText.innerText = "Hide";
+        }
+        else {
+            passwordInputField.type = "password";
+            visibilityToggleButtonText.innerText = "Show";
+        }
+    }
 
-	successCallback = (values) => {
-		localStorage.setItem('authToken', values.data.result.authToken);
-		this.props.history.push('/student/dashboard');
-	}
+    setLocalStorage = (values) => {
+        localStorage.setItem('authToken', values.data.result.authToken);
+        this.props.history.push('/student/dashboard');
+    }
 
-	failureCallback = (error) => {
-		console.log(error.response);
-		let message;
-		const {retryTime} = error.response.data.result;
-		if (retryTime) {
-			message = `${error.response.data.message} Please try again${'  '}after ${retryTime.minutes} minutes and ${retryTime.seconds} seconds.`;
-		} else {
-			message = error.response.data.message;
-		}
-		this.setState({error: true, message: message});
+    
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const user = this.state;
+        auth.login(user, this.setLocalStorage);
+    }
 
-	}
+    handleChange = (event) => {
+        const value = event.target.value;
+        const name = event.target.name;
+        this.setState({
+            [name]: value
+        });
+    }
+    
+    render() {
+        const { email, password } = this.state;
 
 	handleSubmit = (event) => {
 		event.preventDefault();
