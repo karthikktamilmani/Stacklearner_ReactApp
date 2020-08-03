@@ -4,22 +4,22 @@
  * @author :: Karthikk Tamil Mani, B00838575
  */
 
-import React, { Component } from "react";
+import React, {Component} from "react";
 import $ from "jquery";
 import "./index.scss";
 import Swal from "sweetalert2";
-import { Link } from 'react-router-dom';
-import { fetchCardDetails, addCardDetails, subscribe, getSubscriptionStatus } from "../../store";
+import {Link} from 'react-router-dom';
+import {addCardDetails, fetchCardDetails, getSubscriptionStatus, subscribe} from "../../store";
 import axios from "../../authentication/axios-user-management";
 
 export default class Subscription extends Component {
-  constructor(props) {
-    super(props);
-    //
-    this.isChrome =
-      !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+	constructor(props) {
+		super(props);
+		//
+		this.isChrome =
+			!!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
 
-    this.state = {
+		this.state = {
       plan: {
         plan: "Monthly",
         price: 10,
@@ -215,10 +215,11 @@ export default class Subscription extends Component {
       <div className="flex-column subscription-wrapper">
         <header>
           <nav className="navbar dark-navbar">
-            <Link to="/" className="logo"><i className="logo-icon fas fa-terminal"></i>stacklearner</Link>
-            <ul className="main-nav">
-              <li><Link to="/student/dashboard" className="nav-links" aria-label="Go to your student\'s dashboard"><i className="fas fa-angle-left"></i>Back To Dashboard</Link></li>
-            </ul>
+						<Link to="/student/dashboard" className="logo"><i className="logo-icon fas fa-terminal"/>stacklearner</Link>
+						<ul className="main-nav">
+							<li><Link to="/student/dashboard" className="nav-links" aria-label="Go to your student\'s dashboard"><i
+								className="fas fa-angle-left"></i>Back To Dashboard</Link></li>
+						</ul>
           </nav>
         </header>
         <div
