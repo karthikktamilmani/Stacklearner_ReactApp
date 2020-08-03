@@ -1378,9 +1378,17 @@ blockquote footer {
   padding: 1rem;
   display: flex;
   justify-content: space-between;
+    align-items: center;
+}
+
+.module-card-controls-container button {
+    padding-bottom: 0;
 }
 
 .tutorial-card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   font-size: 0.85rem;
   border-bottom: 1px solid #EFEEFD;
 }
@@ -1389,6 +1397,38 @@ blockquote footer {
   margin-left: 0.5rem;
   margin-top: 1px;
 }
+
+.tutorial-card-container button {
+    padding: 0;
+}
+
+
+
+
+.create-tutorial-form-container .form-controls-group-inner {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0 1rem 1rem;
+}
+
+.create-tutorial-form-container input {
+    width: 43%;
+}
+
+.create-tutorial-form-container .submit-tutorial-form-button {
+    width: 10%;
+    font-size: inherit;
+    font-family: inherit;
+    border: none;
+    background: transparent;
+}
+
+.create-tutorial-form-container .submit-tutorial-form-button i {
+    font-size: 2rem;
+}
+
+/* Authentication and Forgot Password Styles */
 
 .authentication-form-container,
 .forgotpassword-form-container {

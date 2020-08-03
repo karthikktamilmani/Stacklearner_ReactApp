@@ -23,7 +23,7 @@ const TutorialPlayer = (props) => {
 			<>
 				<h2 className="tutorial-title-link"><Link to="/student/dashboard" aria-label="Go back to the dashboard"><i
 					className="fas fa-angle-left"/>{data.tutorialTitle}</Link></h2>
-				<video src={"/videos/tutorial_1.mp4"} controls/>
+				<video src={data.tutorialVideoURL} controls/>
 			</>
 		);
 	} else {
