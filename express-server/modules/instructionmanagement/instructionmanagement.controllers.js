@@ -5,7 +5,7 @@ const { Project, Module, Tutorial } = require('../../models/learningpath.models'
 
 // Controller - Fetch all projects from DB sorted by projectNumber
 const getAllProjects = async (req, res) => {
-    const query = Project.find({}, {_v: 0, projectNumber: 0}).sort({projectNumber: 1});
+    const query = Project.find({}, {_v: 0}).sort({projectNumber: 1});
 
     try {
         const result = await query.exec();
