@@ -9,8 +9,7 @@ const getAllProjects = async (req, res) => {
 
     try {
         const result = await query.exec();
-        if (result) res.status(200).json(result);
-        else res.status(204).send();
+        res.status(200).json(result);
     } catch (err) {
         res.status(400).send(err);
     }
@@ -37,8 +36,7 @@ const getOneProject = async (req, res) => {
 
     try {
         const result = await query.exec();
-        if (result) res.status(200).json(result);
-        else res.status(204).send();
+        res.status(200).json(result);
     } catch (err) {
         res.status(400).send(err);
     }
@@ -99,8 +97,7 @@ const getAllModules = async (req, res) => {
 
     try {
         const result = await query.exec();
-        if (result.length > 0) res.status(200).send(result);
-        else res.status(204).send();
+        res.status(200).json(result);
     } catch (err) {
         res.status(400).send(err);
     }
@@ -113,8 +110,7 @@ const getOneModule = async (req, res) => {
 
     try {
         const result = await query.exec();
-        if (result) res.status(200).json(result);
-        else res.status(204).send();
+        res.status(200).json(result);
     } catch (err) {
         res.status(400).send(err);
     }
@@ -170,8 +166,7 @@ const getAllTutorials = async (req, res) => {
 
     try {
         const result = await query.exec();
-        if (result.length > 0) res.status(200).json(result);
-        else res.status(204).send();
+        res.status(200).json(result);
     } catch (err) {
         res.status(400).send(err);
     }
@@ -184,8 +179,7 @@ const getOneTutorial = async (req, res) => {
 
     try {
         const result = await query.exec();
-        if (result) res.status(200).json(result);
-        else res.status(204).send();
+        res.status(200).json(result);
     } catch (err) {
         res.status(400).send(err);
     }

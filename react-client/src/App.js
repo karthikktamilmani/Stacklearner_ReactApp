@@ -21,6 +21,7 @@ import Subscription from './components/Subscription/';
 import Payment from './components/Payment/';
 import InstructorDashboard from './components/InstructorDashboard/InstructorDashboard';
 import CreateProject from './components/InstructorDashboard/CreateProject';
+import ProjectCurriculum from './components/InstructorDashboard/ProjectCurriculum';
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/instructor/dashboard" component={InstructorDashboard} />
         <Route exact path="/instructor/createproject" component={CreateProject} />
+        <Route exact path="/instructor/curriculum/:projectID/:projectTitle" component={ProjectCurriculum} />
         <ProtectedRoute>
           <Route exact path="/student/dashboard" component={StudentDashboard} />
           <Route exact path="/student/profile" component={StudentProfile} />

@@ -4,6 +4,8 @@ import Spinner from "react-bootstrap/Spinner";
 
 const Project = ({_id, projectTitle, projectNumber, projectDescription, projectDemoLink, projectLengthHours, projectLengthMinutes, projectAccessLevel, projectImageURL, imageBackgroundColor, deleteHandler}) => {
 
+        const toParameters = { pathname: `/instructor/curriculum/${_id}/${projectTitle}`}
+
         return (
             <div className="col-md-4 col-sm-12">
                 <div className="project-card-container instructor-project-card-container">
@@ -18,14 +20,14 @@ const Project = ({_id, projectTitle, projectNumber, projectDescription, projectD
                             <p>{projectDescription}</p>
                             <div className="project-card-controls-container">
                                 <Link
-                                    to={`/instructpr/curriculum/${_id}`}
+                                    to={toParameters}
                                     className="button button-small button-green-outline"><span>Add / Edit Curriculum</span><i
                                     className="fas fa-angle-right"/></Link>
                                 <p className="text-muted">Project {projectNumber} &middot; {projectLengthHours}h {projectLengthMinutes}m</p>
                             </div>
                             <div className="project-card-controls-container">
                                 <Link
-                                    to={`/instructpr/editproject/${_id}`}
+                                    to={`/instructor/editproject/${_id}`}
                                     className="text-button text-button-small text-button-blue"><span>Edit Project</span></Link>
                                 <button className="text-button text-button-small text-button-pink" onClick={() => deleteHandler(_id, projectTitle)}>Delete</button>
                             </div>
