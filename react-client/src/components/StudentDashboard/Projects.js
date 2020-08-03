@@ -120,7 +120,7 @@ class Projects extends Component {
 			} else {
 				this.setState({isPro: false});
 			}
-			// console.log(this.state.isPro);
+			console.log(this.state.isPro);
 		}
 		fetchData();
 	}

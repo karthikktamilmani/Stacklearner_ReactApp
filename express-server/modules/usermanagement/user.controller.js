@@ -43,7 +43,7 @@ function userController() {
 		}
 
 		if (!isValid) {
-			message = requiredFields.length > 1 ? `${requiredFields.join(', ')} are required.` : `${requiredFields.join(',')} is required.`;
+			message = requiredFields.length > 1 ? `${requiredFields.join(', ')} are required!` : `${requiredFields.join(',')} is required!`;
 			resp = createResponse(message, {})
 			res.status(400);
 			return res.json(resp);
@@ -114,7 +114,7 @@ function userController() {
 
 		User.findOne(query)
 			.populate('roles')
-			.exec(async (err, user) => {
+			.exec((err, user) => {
 				if (err) {
 					resp = createResponse(err, {});
 					res.status(500);
@@ -123,12 +123,10 @@ function userController() {
 
 				if (user) {
 					const validCreds = userService.verifyPassword(req.body.password, user.password);
-					const currentTime = Math.floor(Date.now());
+					const currentTime = Math.floor(Date.now() / 1000);
 					const retryTime = new Date(user.retryAfter).getTime();
-					console.log("Current TIme:", currentTime, new Date(currentTime));
-					console.log("Retry time:", retryTime, new Date(retryTime));
 					if (user.unSuccessfulLoginAttempt > 5 && currentTime < retryTime) {
-						let retrySeconds = Math.floor((retryTime - currentTime) / 1000);
+						let retrySeconds = retryTime - currentTime;
 						let minutes = Math.floor(retrySeconds / 60);
 						let seconds = retrySeconds - minutes * 60;
 						let result = {
@@ -138,7 +136,7 @@ function userController() {
 							}
 						}
 						res.status(401);
-						resp = createResponse(`Too many unsuccessful attempts.`, result);
+						resp = createResponse(`Too many unsuccessful attempts!`, result);
 						res.json(resp);
 					} else if (validCreds) {
 						let payload = {
@@ -154,10 +152,6 @@ function userController() {
 							"user": user,
 							"authToken": authToken
 						}
-						if (user.unSuccessfulLoginAttempt > 0) {
-							user.unSuccessfulLoginAttempt = 0;
-							user = await user.save();
-						}
 						resp = createResponse("Login Successful", result);
 						res.status(201);
 
@@ -169,14 +163,14 @@ function userController() {
 							user.unSuccessfulLoginAttempt += 1;
 						} else {
 							user.unSuccessfulLoginAttempt += 1;
-							user.retryAfter = currentTime + 600000;
+							user.retryAfter = currentTime + 600;
 						}
 						user.save((err) => {
 							if (err) {
 								res.send(err);
 							} else {
 								res.status(401);
-								resp = createResponse("Incorrect username or password.", {});
+								resp = createResponse("Incorrect username or password!", {});
 								res.json(resp);
 							}
 						});
@@ -184,7 +178,7 @@ function userController() {
 					}
 				} else {
 					res.status(401);
-					resp = createResponse("Incorrect username or password.", {});
+					resp = createResponse("Incorrect username or password!", {});
 					res.json(resp);
 				}
 			});
@@ -196,8 +190,7 @@ function userController() {
 			algorithm: "RS256"
 		};
 
-		console.log(req.body);
-		const {email, currURL} = req.body;
+		const {email} = req.body;
 		const query = {"email": email}
 		let resp;
 		try {
@@ -213,7 +206,7 @@ function userController() {
 				console.log('saved');
 				let htmlMessage = `Hello ${user.firstName} ${user.lastName},
 		 		<p>Please click the link below to reset your password</p>
-		 		<p><a href="${currURL}/changePassword?token=${token}">${currURL}/changePassword?token=${token}</a></p>
+		 		<p><a href="http://localhost:3000/user/forgotPassowrd?token=${token}">http://localhost:3000/user/forgotPassowrd?token=${token}</a></p>
 		 		<p>Note: The above link is only valid for 1 hour.</p>
 		 		<br>
 		 		<br>
@@ -221,11 +214,11 @@ function userController() {
 		 		`;
 				console.log('calling send mail');
 				sendMail(user.email, 'Password reset', htmlMessage);
-				resp = createResponse(`Email sent to ${user.email}. Please check your email.`, {});
+				resp = createResponse(`Email sent to ${user.email}! Please check your email!`, {});
 				res.status(200);
 				res.json(resp);
 			} else {
-				resp = createResponse(`Email id you entered is not valid.`, {});
+				resp = createResponse(`Email id you entered is not valid!`, {});
 				res.status(400);
 				res.json(resp);
 			}
@@ -269,7 +262,7 @@ function userController() {
 				if (err) {
 					return res.send(err);
 				}
-				resp = createResponse("Password updated successfully.", {user: user});
+				resp = createResponse("Password updated successfully!", {user: user});
 				return res.json(resp);
 			})
 		}
@@ -325,7 +318,7 @@ function userController() {
 			if (err) {
 				return res.send(err);
 			}
-			resp = createResponse("Profile updated successfully.", {user: user});
+			resp = createResponse("Profile updated successfully!", {user: user});
 			return res.json(resp);
 		})
 	}
