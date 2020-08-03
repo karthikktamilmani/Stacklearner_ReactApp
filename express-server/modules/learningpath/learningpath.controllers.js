@@ -9,7 +9,7 @@ const {Project, Module, Tutorial} = require('../../models/learningpath.models');
 // Controller to fetch all projects from DB
 const getAllProjects = (req, res) => {
 	// Create query to find all projects and populate the result with project's modules
-	const query = Project.find({});
+	const query = Project.find({}, {_v: 0}).sort({projectNumber: 1});
 
 	// Execute query and return array of projects
 	query.exec((err, projects) => {

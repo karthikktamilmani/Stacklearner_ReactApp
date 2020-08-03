@@ -2,7 +2,7 @@
 // Author: Ravi Patel
 
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Spinner from "react-bootstrap/Spinner";
 
 const Project = ({_id, projectTitle, projectNumber, projectDemoLink, projectLengthHours, projectLengthMinutes, projectAccessLevel, isPro, progress, projectImageURL, imageBackgroundColor}) => {
@@ -17,7 +17,6 @@ const Project = ({_id, projectTitle, projectNumber, projectDemoLink, projectLeng
 						<img src={projectImageURL} alt="Todo list app project"/>
 					</div>
 					<div className="project-card-outer-body">
-						{console.log(progress)}
 						<div className="progress-bar" style={{width: `${progress}%`}} role="progressbar" aria-valuenow={{progress}}
 								 aria-valuemin="0" aria-valuemax="100"/>
 						<div className="project-card-inner-body">
