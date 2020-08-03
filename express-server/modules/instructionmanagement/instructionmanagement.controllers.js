@@ -1,270 +1,230 @@
-// Author: Mansoor Ghazi
+// Import data models
+const { Project, Module, Tutorial } = require('../../models/learningpath.models');
 
-/* Import code dependencies. In this case, these are
-learning path module's data models. */
-const {Project, Module, Tutorial} = require('../../models/learningpath.models');
+// PROJECT RESOURCE Controllers
 
-// Controller to get all projects from the Projects collection
-function getAllProjects(req, res) {
-	// Create query to find all projects
-	const query = Project.find({})
+// Controller - Fetch all projects from DB sorted by projectNumber
+const getAllProjects = async (req, res) => {
+    const query = Project.find({}, {_v: 0}).sort({projectNumber: 1});
 
-	// Execute query and return array of projects
-	query.exec((err, projects) => {
-		if (err) {
-			res.status(400).json({message: `Following error was encountered: ${err}`});
-		} else if (!projects) {
-			res.status(404).send('No projects found.');
-		} else {
-			res.status(200).json(projects);
-		}
-	});
+    try {
+        const result = await query.exec();
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(400).send(err);
+    }
 }
 
-// Controller to get a single project from Projects collection
-function getOneProject(req, res) {
-	// Get projectID from query parameters and create a findById query
-	const projectID = req.params.projectID;
-	const query = Project.findById(projectID)
+// Controller - Fetch total number (count) projects from DB sorted by projectNumber
+const getProjectsCount = async (req, res) => {
+    const query = Project.aggregate([{
+        $count: "projectsCount"
+    }]);
 
-	// Execute query - return project and its modules
-	query.exec((err, project) => {
-		if (err) {
-			res.status(400).json({message: `Following error was encountered: ${err}`});
-		} else if (!project) {
-			res.status(404).send('Project not found.');
-		} else {
-			res.status(200).json(project);
-		}
-	});
+    try {
+        const result = await query.exec();
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(400).send(err);
+    }
 }
 
-// Controller to create a project in the Projects collection
-function createProject(req, res) {
-	// Instantiate Project object
-	const projectToSave = new Project(req.body);
+// Controller - Fetch a single project from DB
+const getOneProject = async (req, res) => {
+    const { projectID } = req.params;
+    const query = Project.findById(projectID);
 
-	// Save Project
-	projectToSave.save().then(() => {
-		res.status(200).send('Project saved.')
-	}).catch((err) => {
-		console.log(err)
-	});
+    try {
+        const result = await query.exec();
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(400).send(err);
+    }
 }
 
-// Controller to update a project
-function updateProject(req, res) {
-	// Get projectID from query parameters
-	// Create query to find and update the project
-	const projectID = req.params.projectID;
-	const query = Project.findByIdAndUpdate(projectID, req.body, {new: true}, {useFindAndModify: false});
+// Controller - Create a new project in DB
+const createProject = async (req, res) => {
+    const url = `${req.protocol}://${req.get('host')}`;
+    let project = req.body;
+    project.projectImageURL = url + '/public/' + req.file.filename;
+    const projectModel = new Project(project);
 
-	// Execute query
-	query.exec((err) => {
-		if (err) {
-			res.status(400).json({message: `Following error was encountered: ${err}`});
-		} else {
-			res.status(200).send('Project updated.');
-		}
-	});
+    try {
+        const result = await projectModel.save();
+        res.status(201).json(result);
+    } catch (err) {
+        res.status(400).send(err);
+    }
 }
 
-// Controller to delete a project and its modules
-function deleteProject(req, res) {
-	// Get projectID from query parameters
-	// Create query to remove the project
-	// Create query (deleteModuleQuery) to find and delete all modules
-	const projectID = req.params.projectID;
-	const deleteProjectQuery = Project.findByIdAndRemove(projectID, {useFindAndModify: false});
-	const deleteModuleQuery = Module.deleteMany({projectID: projectID});
+// Controller - Update a project in DB
+const updateProject = async (req, res) => {
+    const { projectID } = req.params;
+    const updatedFields = req.body;
+    const url = `${req.protocol}://${req.get('host')}`;
+    updatedFields.projectImageURL = url + '/public/' + req.file.filename;
+    const query = Project.findByIdAndUpdate(projectID, updatedFields, { new: true, useFindAndModify: false });
 
-	// First execute the deleteProjectQuery, THEN the deleteModuleQuery
-	deleteProjectQuery.exec((err) => {
-		if (err) {
-			res.status(400).json({message: `Following error was encountered: ${err}`});
-		} else {
-			deleteModuleQuery.exec((err) => {
-				if (err) {
-					res.status(400).json({message: `Following error was encountered: ${err}`});
-				} else {
-					res.status(200).send('Project deleted.');
-				}
-			});
-		}
-	})
-
+    try {
+        const result = await query.exec();
+        res.status(200).json();
+    } catch (err) {
+        res.status(400).send(err);
+    }
 }
 
-// MODULE RESOURCE CONTROLLERS
+// Controller - Delete a project from DB
+const deleteProject = async (req, res) => {
+    const { projectID } = req.params;
+    const deleteProjectQuery = Project.findOneAndDelete({_id: projectID});
 
-// Controller to get all modules of a project from the Modules collection
-function getAllModules(req, res) {
-	// Get projectID from query parameters to fetch only project's modules
-	// Create query to get modules by projectID
-	const moduleProjectID = req.params.projectID;
-	const query = Module.find({moduleProjectID});
-
-	//  Execute query and return all modules that have the same projectID
-	query.exec((err, modules) => {
-		if (err) {
-			res.status(400).json({message: `Following error was encountered: ${err}`});
-		} else if (!modules) {
-			res.status(404).send('No modules found.');
-		} else {
-			res.status(200).json(modules);
-		}
-	});
+    try {
+        const result = await deleteProjectQuery.exec();
+        await Module.deleteMany({moduleProjectID: result._id});
+        await Tutorial.deleteMany({tutorialProjectID: result._id});
+        res.status(200).send();
+    } catch (err) {
+        res.status(400).send(err);
+    }
 }
 
-// Controller to create a module - module references its parent project
-function createModule(req, res) {
-	// Get projectID from query parameters - Module will be saved with this projectID
-	// Create Module object from request body
-	// Add projectID property to moduleToSave
-	const projectID = req.params.projectID;
-	const moduleToSave = new Module(req.body);
-	moduleToSave.moduleProjectID = projectID;
+// MODULE RESOURCE Controllers
 
-	// Save module to Modules collection
-	moduleToSave.save().then(() => {
-		res.status(200).send('Module saved.')
-	}).catch((err) => {
-		res.status(400).json({message: `Following error was encountered: ${err}`});
-	});
+// Controller - Fetch all nodules of a project, sorted by their number, from DB
+const getAllModules = async (req, res) => {
+    const { projectID } = req.params;
+    const query = Module.find({moduleProjectID: projectID}).sort({moduleNumber: 1});
+
+    try {
+        const result = await query.exec();
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(400).send(err);
+    }
 }
 
-// Controller to update a module
-function updateModule(req, res) {
-	// Get ID of the module to update from the query parameters
-	// Create query to update module
-	const moduleID = req.params.moduleID;
-	const query = Module.findByIdAndUpdate(moduleID, req.body, {new: true}, {useFindAndModify: false});
+// Controller - Fetch a single module of a project from DB
+const getOneModule = async (req, res) => {
+    const { moduleID } = req.params;
+    const query = Module.findById(moduleID);
 
-	// Execute query
-	query.exec((err) => {
-		if (err) {
-			res.status(400).json({message: `Following error was encountered: ${err}`});
-		} else {
-			res.status(200).send('Module updated.');
-		}
-	});
+    try {
+        const result = await query.exec();
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(400).send(err);
+    }
 }
 
-// Controller to delete a module
-function deleteModule(req, res) {
-	// Get ID of the module to delete from the query parameters
-	// Create query to delete module that has the above moduleID
-	const moduleID = req.params.moduleID
-	const query = Module.findByIdAndRemove(moduleID, {useFindAndModify: false});
+// Controller - Create a new module for a project in DB
+const createModule = async (req, res) => {
+    const module = req.body;
+    const moduleModel = new Module(module);
 
-	// Execute query to delete module from Modules collection
-	query.exec((err) => {
-		if (err) {
-			res.status(400).json({message: `Following error was encountered: ${err}`});
-		} else {
-			res.status(200).send('Module deleted.');
-		}
-	});
+    try {
+        const result = await moduleModel.save();
+        res.status(201).json(result);
+    } catch (err) {
+        res.status(400).send(err);
+    }
 }
 
-// TUTORIAL RESOURCE CONTROLLERS
+// Controller - Update a module
+const updateModule = async (req, res) => {
+    const { moduleID } = req.params;
+    const updatedFields = req.body;
+    const query = Module.findByIdAndUpdate(moduleID, updatedFields, { new: true, useFindAndModify: false });
 
-// Controller to get a tutorial
-function getOneTutorial(req, res) {
-	// Get tutorialID from query parameters and create a findById query
-	const tutorialID = req.params.tutorialID;
-	const query = Tutorial.findById(tutorialID)
-
-	// Execute query - return project and its modules
-	query.exec((err, tutorial) => {
-		if (err) {
-			res.status(400).json({message: `Following error was encountered: ${err}`});
-		} else if (!tutorial) {
-			res.status(404).send('Tutorial not found.');
-		} else {
-			res.status(200).json(tutorial);
-		}
-	});
+    try {
+        const result = await query.exec();
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(400).send(err);
+    }
 }
 
-// Controller to get all tutorials of a project
-function getTutorialsOfProject(req, res) {
-	// Get projectID from query parameters to fetch only project's tutorials
-	// Create query to get tutorials by projectID
-	const tutorialProjectID = req.params.projectID;
-	const query = Tutorial.find({tutorialProjectID});
+// Controller - Delete a module
+const deleteModule = async (req, res) => {
+    const { moduleID } = req.params;
+    const deleteModuleQuery = Module.findOneAndDelete({_id: moduleID});
 
-	//  Execute query and return all modules that have the same projectID
-	query.exec((err, tutorials) => {
-		if (err) {
-			res.status(400).json({message: `Following error was encountered: ${err}`});
-		} else if (!tutorials) {
-			res.status(404).send('No tutorials found.');
-		} else {
-			res.status(200).json(tutorials);
-		}
-	});
+    try {
+        const result = await deleteModuleQuery.exec();
+        await Tutorial.deleteMany({tutorialModuleID: result._id});
+        res.status(200).send();
+    } catch (err) {
+        res.status(400).send(err);
+    }
 }
 
-// Controller to get a specific tutorial of a project
-function getOneTutorialOfProject(req, res) {
-	res.send('Getting tutorial of a project');
+// TUTORIAL RESOURCE Controllers
+
+// Controller - Fetch all tutorials of a module, sorted by their number, from DB
+const getAllTutorials = async (req, res) => {
+    const { moduleID } = req.params;
+    const query = Tutorial.find({tutorialModuleID: moduleID}).sort({tutorialNumber: 1});
+
+    try {
+        const result = await query.exec();
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(400).send(err);
+    }
 }
 
-// Controller to get all tutorials of a module
-function getTutorialsOfModule(req, res) {
-	// Get projectID from query parameters to fetch only project's tutorials
-	// Create query to get tutorials by projectID
-	const tutorialModuleID = req.params.moduleID;
-	const query = Tutorial.find({tutorialModuleID});
+// Controller - Fetch a single tutorial from DB
+const getOneTutorial = async (req, res) => {
+    const { tutorialID } = req.params;
+    const query = Tutorial.findById(tutorialID);
 
-	//  Execute query and return all modules that have the same projectID
-	query.exec((err, tutorials) => {
-		if (err) {
-			res.status(400).json({message: `Following error was encountered: ${err}`});
-		} else if (!tutorials) {
-			res.status(404).send('No tutorials found.');
-		} else {
-			res.status(200).json(tutorials);
-		}
-	});
+    try {
+        const result = await query.exec();
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(400).send(err);
+    }
 }
 
-// Controller to create a tutorial
-function createTutorial(req, res) {
-	// Get projectID from query parameters - Tutorial will be saved with this projectID
-	// Get moduleID from query parameters - Tutorial will be saved with this moduleID
-	// Create Tutorial object from request body
-	// Add projectID property to tutorialToSave
-	// Add moduleID property to moduleToSave
-	const projectID = req.params.projectID;
-	const moduleID = req.params.moduleID;
-	const tutorialToSave = new Tutorial(req.body);
-	tutorialToSave.tutorialProjectID = projectID;
-	tutorialToSave.tutorialModuleID = moduleID;
+// Controller - Create a new tutorial
+const createTutorial = async (req, res) => {
+    const tutorial = req.body;
+    const tutorialModel = new Tutorial(tutorial);
 
-	// Save tutorial to tutorials collection
-	tutorialToSave.save().then(() => {
-		res.status(200).send('Tutorial saved.')
-	}).catch((err) => {
-		res.status(400).json({message: `Following error was encountered: ${err}`});
-	});
+    try {
+        const result = await tutorialModel.save();
+        res.status(201).json(result);
+    } catch (err) {
+        res.status(400).send(err);
+    }
 }
 
-// Export controllers through object export pattern
-module.exports = {
-	getAllProjects,
-	getOneProject,
-	createProject,
-	deleteProject,
-	updateProject,
-	getAllModules,
-	createModule,
-	updateModule,
-	deleteModule,
-	createTutorial,
-	getOneTutorial,
-	getTutorialsOfProject,
-	getOneTutorialOfProject,
-	getTutorialsOfModule
-};
+// Controller - Update a tutorial
+const updateTutorial = async (req, res) => {
+    const { tutorialID } = req.params;
+    const updatedFields = req.body;
+    const query = Tutorial.findByIdAndUpdate(tutorialID, updatedFields, { new: true, useFindAndModify: false });
+
+    try {
+        const result = await query.exec();
+        res.status(200).json(result);
+    } catch (err) {
+        res.status(400).send(err);
+    }
+}
+
+// Controller - Delete a tutorial
+const deleteTutorial = async (req, res) => {
+    const { tutorialID } = req.params;
+    const deleteTutorialQuery = Tutorial.findOneAndDelete({_id: tutorialID});
+
+    try {
+        const result = await deleteTutorialQuery.exec();
+        res.status(200).send();
+    } catch (err) {
+        res.status(400).send(err);
+    }
+}
+
+// Export controllers as object's fields
+module.exports = { getAllProjects, getProjectsCount, getOneProject, createProject, updateProject,  deleteProject, getAllModules,
+    getOneModule, createModule, updateModule, deleteModule, getAllTutorials, getOneTutorial, createTutorial, updateTutorial, deleteTutorial };

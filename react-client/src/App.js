@@ -21,26 +21,31 @@ import Subscription from './components/Subscription/';
 import Payment from './components/Payment/';
 import ForgotPassword from "./components/StudentProfile/ForgotPassword";
 import ChangePassword from "./components/StudentProfile/ChangePassword";
+import InstructorDashboard from './components/InstructorDashboard/InstructorDashboard';
+import CreateProject from './components/InstructorDashboard/CreateProject';
+import ProjectCurriculum from './components/InstructorDashboard/ProjectCurriculum';
+
 
 function App() {
-	return (
-		<>
-			<Switch>
-				{/*<CheckLogin>*/}
-				<Route exact path="/" component={LandingPage}/>
-				<Route exact path="/signin" component={SignIn}/>
-				<Route exact path="/signup" component={SignUp}/>
-				{/*</CheckLogin>*/}
-				<Route exact path="/forgotpassword" component={ForgotPassword}/>
+  return (
+    <>
+      <Switch>
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/forgotpassword" component={ForgotPassword}/>
 				<Route exact path="/changepassword" component={ChangePassword}/>
-				<ProtectedRoute>
-					<Route exact path="/student/dashboard" component={StudentDashboard}/>
-					<Route exact path="/student/profile" component={StudentProfile}/>
-					<Route exact path="/student/projects/:projectID" component={Curriculum}/>
-					<Route path="/subscription" exact component={Subscription}/>
-					<Route path="/payment-settings" exact component={Payment}/>
-				</ProtectedRoute>
-			</Switch>
+        <Route exact path="/instructor/dashboard" component={InstructorDashboard} />
+        <Route exact path="/instructor/createproject" component={CreateProject} />
+        <Route exact path="/instructor/curriculum/:projectID/:projectTitle" component={ProjectCurriculum} />
+        <ProtectedRoute>
+          <Route exact path="/student/dashboard" component={StudentDashboard} />
+          <Route exact path="/student/profile" component={StudentProfile} />
+          <Route exact path="/student/projects/:projectID" component={Curriculum} />
+          <Route path="/subscription" exact component={Subscription} />
+          <Route path="/payment-settings" exact component={Payment} />
+        </ProtectedRoute>
+      </Switch>
     </>
   );
 }

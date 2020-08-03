@@ -158,8 +158,6 @@ class UpdateProfile extends Component {
 					</StyleRoot>
 				</main>
 			</>
-
-
 		);
 	}
 }
