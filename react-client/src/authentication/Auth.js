@@ -24,6 +24,7 @@ class Auth {
 			.then((response) => {
 				// console.log(response);
 				this.authenticated = true;
+				console.log(this.authenticated);
 				this.user = response.data.result.user;
 				successCallback(response);
 			})
