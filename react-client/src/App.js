@@ -19,6 +19,7 @@ import StudentProfile from './components/StudentProfile/StudentProfile';
 import Curriculum from './components/Curriculum/Curriculum';
 import Subscription from './components/Subscription/';
 import Payment from './components/Payment/';
+import InstructorDashboard from './components/InstructorDashboard/InstructorDashboard';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/subscription" exact component={Subscription} />
           <Route path="/payment-settings" exact component={Payment} />
         </ProtectedRoute>
+        <Route exact path="/instructor/dashboard" component={InstructorDashboard} />
       </Switch>
     </>
   );
