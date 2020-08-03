@@ -18,17 +18,17 @@ class Main extends Component {
     }
 
     getAllProjects = () => {
-			axios.get('http://localhost:4000/landingpage/projects').then((res) => {
+			axios.get('/landingpage/projects').then((res) => {
 				if (res.status === 200) {
 					this.setState({
 						projects: res.data
 					});
 				}
 			}).catch((err) => {
-            this.setState({
-                error: true
-            })
-        });
+				this.setState({
+					error: true
+				})
+			});
     }
 
     setBackgroundColors = (projects) => {
