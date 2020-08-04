@@ -7,6 +7,31 @@ import axios from '../../authentication/axios-user-management';
 import ProjectCard from './ProjectCard';
 import Loading from '../Common/Loading';
 import Testimonials from './Testimonials';
+import Radium, {StyleRoot} from "radium";
+import {bounceInUp, fadeIn, fadeInDown, fadeInLeft, fadeInUp} from "react-animations";
+
+const styles = {
+	fadeIn: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeIn, 'fadeIn')
+	},
+	fadeInLeft: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeInLeft, 'fadeInLeft')
+	},
+	bounceInUp: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(bounceInUp, 'bounceInUp')
+	},
+	fadeInUp: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeInUp, 'fadeInUp')
+	},
+	fadeInDown: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeInDown, 'fadeInDown')
+	}
+}
 
 class Main extends Component {
 	constructor(props) {
@@ -14,8 +39,8 @@ class Main extends Component {
 		this.state = {
 			projects: [],
 			error: false
-        };
-    }
+		};
+	}
 
     getAllProjects = () => {
 			axios.get('/landingpage/projects').then((res) => {
@@ -65,19 +90,24 @@ class Main extends Component {
         return (
             <main>
                 <section className="landing-projects-section gray-background">
-                    <div className="container">
-                        <div className="grid">
-                            <div className="col-md-8 col-sm-12">
-                                <h2>What We'll Build</h2>
-                                <hr className="thick"/>
-                            </div>
-                        </div>
-                        {
-                            projects.length > 0 ? <div className="grid landing-projects-wrapper">
-                                {this.displayProjectCards(projects)}
-                            </div> : <Loading message="Loading your projects..."/>
-                        }
-                    </div>
+									<div className="container">
+										<div className="grid">
+											<div className="col-md-8 col-sm-12">
+												<h2>What We'll Build</h2>
+												<hr className="thick"/>
+											</div>
+										</div>
+										<StyleRoot>
+											<div className={styles.fadeInUp}>
+												{
+													projects.length > 0 ? <div className="grid landing-projects-wrapper">
+														{this.displayProjectCards(projects)}
+													</div> : <Loading message="Loading your projects..."/>
+												}
+											</div>
+										</StyleRoot>
+
+									</div>
                 </section>
                 <Testimonials />
             </main>

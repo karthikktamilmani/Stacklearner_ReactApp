@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import {BrowserRouter} from 'react-router-dom';
-// console.log = ()=>{}
-// console.warn = () => {
-// }
+
+console.log = () => {
+}
+console.warn = () => {
+}
 
 ReactDOM.render(
 	<BrowserRouter>
