@@ -90,7 +90,7 @@ class ModuleCard extends Component {
     }
 
     deleteTutorialFromDB = async (tutorialID) => {
-        return await axios.delete(`http://localhost:4000/instructionmanagement/tutorials/${tutorialID}/deletetutorial`);
+        return await axios.delete(`instructionmanagement/tutorials/${tutorialID}/deletetutorial`);
     }
 
     removeTutorial = (tutorialID, tutorialTitle) => {
