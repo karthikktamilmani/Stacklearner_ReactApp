@@ -19,7 +19,7 @@ class EditProject extends Component {
 
 	getCurrentProject = async () => {
 		const {projectID} = this.props.match.params;
-		return await axios.get(`http://localhost:4000/instructionmanagement/projects/${projectID}`);
+		return await axios.get(`/instructionmanagement/projects/${projectID}`);
 	}
 
 	componentDidMount() {
@@ -50,7 +50,7 @@ class EditProject extends Component {
 
 	updateProject = async (project) => {
 		const {projectID} = this.props.match.params;
-		return await axios.patch(`http://localhost:4000/instructionmanagement/projects/${projectID}/updateproject`, project);
+		return await axios.patch(`/instructionmanagement/projects/${projectID}/updateproject`, project);
 	}
 
 	handleSubmit = (event) => {
