@@ -1,18 +1,43 @@
 // Author: Daksh Patel
-import React, { Component, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, {Component, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 import Footer from '../Common/Footer';
 import auth from '../../authentication/Auth';
 import axios from '../../authentication/axios-user-management';
+import Radium, {StyleRoot} from "radium";
+import {bounceInUp, fadeIn, fadeInDown, fadeInLeft, fadeInUp} from "react-animations";
+
+const styles = {
+	fadeIn: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeIn, 'fadeIn')
+	},
+	fadeInLeft: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeInLeft, 'fadeInLeft')
+	},
+	bounceInUp: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(bounceInUp, 'bounceInUp')
+	},
+	fadeInUp: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeInUp, 'fadeInUp')
+	},
+	fadeInDown: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeInDown, 'fadeInDown')
+	}
+}
 
 const NavBar = () => {
-    useEffect(() => {
-        const mainNav = document.querySelector(".main-nav");
-        const navbarToggle = document.querySelector(".navbar-toggle");
-        navbarToggle.addEventListener('click', () => {
-            mainNav.classList.toggle('active');
-        });
-    });
+	useEffect(() => {
+		const mainNav = document.querySelector(".main-nav");
+		const navbarToggle = document.querySelector(".navbar-toggle");
+		navbarToggle.addEventListener('click', () => {
+			mainNav.classList.toggle('active');
+		});
+	});
 
     return (
         <header>
@@ -110,46 +135,64 @@ class SignUp extends Component {
             <>
                 <NavBar />
                 <main className="gray-background">
-                    <section className="container">
-                        <div className="grid">
-                            <div className="col-md-8 col-sm-12 offset-md-2 authentication-form-container">
-                                <h1>Sign Up</h1>
-                                <p className={userAlreadyExists ? "visible flash-banner pink-background" : "hidden"}>Ooops! a user with this e-mail already exists.<i className="fas fa-times" onClick={this.closeBanner}></i></p>
-                                <p className={error ? "visible flash-banner pink-background" : "hidden"}>Ooops! an error occured while signing you up. Please refresh the page, and try again.<i className="fas fa-times" onClick={this.closeBanner}></i></p>
-                                <form onSubmit={this.handleSubmit}>
-                                    <fieldset>
-                                        <div className="form-controls-group-outer">
-                                            <div className="form-controls-group-inner">
-                                                <label htmlFor="first-name">First Name</label>
-                                                <input type="text" name="firstName" id="first-name" value={firstName} onChange={this.handleChange} autoComplete="on" />
-                                            </div>
-                                            <div className="form-controls-group-inner">
-                                                <label htmlFor="last-name">Last Name</label>
-                                                <input type="text" name="lastName" id="last-name" value={lastName} onChange={this.handleChange} autoComplete="on" />
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <fieldset>
-                                        <div className="form-controls-group-outer last-form-controls-group-outer">
-                                            <div className="form-controls-group-inner">
-                                                <label htmlFor="user-email">Email</label>
-                                                <input type="email" name="email" id="user-email" value={email} onChange={this.handleChange} autoComplete="on"  />
-                                            </div>
-                                            <div className="form-controls-group-inner">
-                                                <label htmlFor="user-password">Password</label>
-                                                <input type="password" name="password" id="user-password" value={password} ref={this.passwordField} onChange={this.handleChange} autoComplete="off" />
-                                                <button type="button" id="password-visibility-toggle" aria-label="Show password" onClick={this.toggleVisibility}><span id="password-visibility-toggle-text" ref={this.toggleButton}>Show</span></button>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-                                    <div className="form-button-container">
-                                        <button type="submit" className="button button-small button-accent-outline">Sign Up</button>
-                                        <Link to="/signin" className="text-link text-link-small text-link-blue" aria-label="Sign up with stacklearner">Have an account? Sign In</Link>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </section>
+									<section className="container">
+										<StyleRoot>
+											<div style={styles.fadeInUp}>
+												<div className="grid">
+													<div className="col-md-8 col-sm-12 offset-md-2 authentication-form-container">
+														<h1>Sign Up</h1>
+														<p className={userAlreadyExists ? "visible flash-banner pink-background" : "hidden"}>Ooops!
+															a user with this e-mail already exists.<i className="fas fa-times"
+																																				onClick={this.closeBanner}></i></p>
+														<p className={error ? "visible flash-banner pink-background" : "hidden"}>Ooops! an error
+															occured while signing you up. Please refresh the page, and try again.<i
+																className="fas fa-times" onClick={this.closeBanner}></i></p>
+														<form onSubmit={this.handleSubmit}>
+															<fieldset>
+																<div className="form-controls-group-outer">
+																	<div className="form-controls-group-inner">
+																		<label htmlFor="first-name">First Name</label>
+																		<input type="text" name="firstName" id="first-name" value={firstName}
+																					 onChange={this.handleChange} autoComplete="on"/>
+																	</div>
+																	<div className="form-controls-group-inner">
+																		<label htmlFor="last-name">Last Name</label>
+																		<input type="text" name="lastName" id="last-name" value={lastName}
+																					 onChange={this.handleChange} autoComplete="on"/>
+																	</div>
+																</div>
+															</fieldset>
+															<fieldset>
+																<div className="form-controls-group-outer last-form-controls-group-outer">
+																	<div className="form-controls-group-inner">
+																		<label htmlFor="user-email">Email</label>
+																		<input type="email" name="email" id="user-email" value={email}
+																					 onChange={this.handleChange} autoComplete="on"/>
+																	</div>
+																	<div className="form-controls-group-inner">
+																		<label htmlFor="user-password">Password</label>
+																		<input type="password" name="password" id="user-password" value={password}
+																					 ref={this.passwordField} onChange={this.handleChange} autoComplete="off"/>
+																		<button type="button" id="password-visibility-toggle" aria-label="Show password"
+																						onClick={this.toggleVisibility}><span id="password-visibility-toggle-text"
+																																									ref={this.toggleButton}>Show</span>
+																		</button>
+																	</div>
+																</div>
+															</fieldset>
+															<div className="form-button-container">
+																<button type="submit" className="button button-small button-accent-outline">Sign Up
+																</button>
+																<Link to="/signin" className="text-link text-link-small text-link-blue"
+																			aria-label="Sign up with stacklearner">Have an account? Sign In</Link>
+															</div>
+														</form>
+													</div>
+												</div>
+											</div>
+										</StyleRoot>
+
+									</section>
                 </main>
                 <Footer />
             </>

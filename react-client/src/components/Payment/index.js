@@ -10,13 +10,29 @@ import SavedCards from './Cards/';
 import History from './History/';
 import {Link} from 'react-router-dom';
 import "./index.scss";
-import {fadeIn} from 'react-animations';
-import Radium, {StyleRoot} from 'radium';
+import Radium, {StyleRoot} from "radium";
+import {bounceInUp, fadeIn, fadeInDown, fadeInLeft, fadeInUp} from "react-animations";
 
 const styles = {
 	fadeIn: {
 		animation: 'x 1s',
 		animationName: Radium.keyframes(fadeIn, 'fadeIn')
+	},
+	fadeInLeft: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeInLeft, 'fadeInLeft')
+	},
+	bounceInUp: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(bounceInUp, 'bounceInUp')
+	},
+	fadeInUp: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeInUp, 'fadeInUp')
+	},
+	fadeInDown: {
+		animation: 'x 1s',
+		animationName: Radium.keyframes(fadeInDown, 'fadeInDown')
 	}
 }
 
@@ -41,67 +57,72 @@ export default class Payment extends Component {
 					</nav>
 				</header>
 				<div className="main-content">
-					<div
-						className="d-flex justify-content-center mt-3"
-						style={{
-							maxWidth: "1100px",
-							margin: "0 auto",
-							width: "100%",
-							height: "fit-content",
-						}}
-					>
-						<div className="d-flex flex-row">
+					<StyleRoot>
+						<div style={styles.fadeInUp}>
 							<div
-								className="nav flex-column nav-pills pr-4"
-								id="v-pills-tab"
-								role="tablist"
-								style={{minWidth: "100px"}}
-								aria-orientation="vertical"
+								className="d-flex justify-content-center mt-3"
+								style={{
+									maxWidth: "1100px",
+									margin: "0 auto",
+									width: "100%",
+									height: "fit-content",
+								}}
 							>
-								<a
-									className="nav-link active"
-									id="v-pills-home-tab"
-									data-toggle="pill"
-									href="#v-pills-home"
-									role="tab"
-									aria-controls="v-pills-home"
-									aria-selected="true"
-								>
-									Saved Cards
-								</a>
-								<a
-									className="nav-link"
-									id="v-pills-profile-tab"
-									data-toggle="pill"
-									href="#v-pills-profile"
-									role="tab"
-									aria-controls="v-pills-profile"
-									aria-selected="false"
-								>
-									Payment History
-								</a>
-							</div>
-							<div className="tab-content" id="v-pills-tabContent"
-									 style={{width: "calc(100vw - 200px)", maxWidth: "600px"}}>
-								<div
-									className="tab-pane fade show active"
-									id="v-pills-home"
-									role="tabpanel"
-									aria-labelledby="v-pills-home-tab"
-								>
-									<SavedCards></SavedCards>
-								</div>
-								<div
-									className="tab-pane fade"
-									id="v-pills-profile"
-									role="tabpanel"
-									aria-labelledby="v-pills-profile-tab"
-								>
-									<History></History>
+								<div className="d-flex flex-row">
+									<div
+										className="nav flex-column nav-pills pr-4"
+										id="v-pills-tab"
+										role="tablist"
+										style={{minWidth: "100px"}}
+										aria-orientation="vertical"
+									>
+										<a
+											className="nav-link active"
+											id="v-pills-home-tab"
+											data-toggle="pill"
+											href="#v-pills-home"
+											role="tab"
+											aria-controls="v-pills-home"
+											aria-selected="true"
+										>
+											Saved Cards
+										</a>
+										<a
+											className="nav-link"
+											id="v-pills-profile-tab"
+											data-toggle="pill"
+											href="#v-pills-profile"
+											role="tab"
+											aria-controls="v-pills-profile"
+											aria-selected="false"
+										>
+											Payment History
+										</a>
+									</div>
+									<div className="tab-content" id="v-pills-tabContent"
+											 style={{width: "calc(100vw - 200px)", maxWidth: "600px"}}>
+										<div
+											className="tab-pane fade show active"
+											id="v-pills-home"
+											role="tabpanel"
+											aria-labelledby="v-pills-home-tab"
+										>
+											<SavedCards></SavedCards>
+										</div>
+										<div
+											className="tab-pane fade"
+											id="v-pills-profile"
+											role="tabpanel"
+											aria-labelledby="v-pills-profile-tab"
+										>
+											<History></History>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					</StyleRoot>
+
 				</div>
 			</div>
 		);
