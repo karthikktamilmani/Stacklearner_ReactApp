@@ -11,6 +11,8 @@ let BASE_URL;
 
 if (window.location.href.includes('localhost')) {
 	BASE_URL = 'http://localhost:4000';
+	// BASE_URL = "https://stacklearner-backend.herokuapp.com/";
+
 } else {
 	BASE_URL = "https://stacklearner-backend.herokuapp.com/";
 }
