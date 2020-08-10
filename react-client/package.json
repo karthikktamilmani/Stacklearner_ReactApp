@@ -11,7 +11,9 @@
     "array-move": "^3.0.0",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
+    "html2canvas": "^1.0.0-rc.6",
     "jquery": "^3.5.1",
+    "jspdf": "^1.5.3",
     "node-sass": "^4.14.1",
     "popper.js": "^1.16.1",
     "radium": "^0.26.0",
@@ -22,6 +24,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-sortable-hoc": "^1.11.0",
+    "save-svg-as-png": "^1.4.17",
     "serve": "^11.3.2",
     "sweetalert2": "^9.17.1"
   },
