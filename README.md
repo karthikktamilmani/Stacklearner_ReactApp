@@ -5,8 +5,7 @@
 
 ## Getting Started
 
-* Deployment URL: https://stacklearner-a4-csci5709.herokuapp.com/
-* Repository URL: https://git.cs.dal.ca/dpandya/group17-stacklearner-a4
+* Deployment URL: https://stacklearner-frontend.herokuapp.com/
 
 ## Features: Author's and Tasks
 
