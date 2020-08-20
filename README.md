@@ -1,4 +1,4 @@
-# Assignment 4: StackLearner
+# StackLearner
 
 * Date Created: 02 07 2020
 * Last Modification Date: 25 07 2020
@@ -172,7 +172,7 @@ The feature’s components are organised into two different set of components: `
 
 ### Karthikk Tamil Mani
 
-####Subscription Management
+### Subscription Management
 This feature helps the students to get access to our premium or pro features/contents. Students can subscribe to a period that they would like and also has options to avail promo codes, save cards for future purchases and get track of the payment.
 
 Tasks:
